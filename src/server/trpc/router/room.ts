@@ -23,13 +23,15 @@ export const roomRouter = router({
       z.object({
         limit: z.number().min(1).max(10).nullish(),
         cursor: z.string().nullish(),
+        isQuestion: z.boolean().default(false),
       })
     )
     .query(async ({ ctx, input }) => {
       const limit = input.limit ?? 5;
-      const { cursor } = input;
+      const { cursor, isQuestion } = input;
 
       const items = await ctx.prisma.room.findMany({
+        where: { isQuestion },
         select: defaultRoomSelect,
         take: limit + 1,
         cursor: cursor ? { id: cursor } : undefined,
@@ -49,6 +51,7 @@ export const roomRouter = router({
         cursor: z.date().nullish(),
         limit: z.number().min(1).max(10).default(5),
         hashtagId: z.string().uuid(),
+        isQuestion: z.boolean().default(false),
       })
     )
     .query(async ({ ctx, input }) => {
@@ -92,6 +95,7 @@ export const roomRouter = router({
     .input(
       z.object({
         id: z.string().uuid().optional(),
+        isQuestion: z.boolean().default(false),
         title: z.string().min(1).max(64),
         description: z.string().min(1).max(128),
         authorName: z.string().optional(),
@@ -156,9 +160,6 @@ export const roomRouter = router({
       });
       return { id };
     }),
-  getCount: publicProcedure.query(
-    async ({ ctx }) => await ctx.prisma.room.count()
-  ),
   pinnedRooms: publicProcedure
     .input(z.object({ authorId: z.string().cuid() }))
     .query(async ({ ctx, input }) => {
