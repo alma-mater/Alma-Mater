@@ -59,7 +59,7 @@ const RoomsSection = ({ session }: RoomSectionProps) => {
       {/* Header */}
       <div className="flex justify-between">
         <div>
-          <NavItem href="/#posts" text="Посты" />
+          <NavItem href="/" text="Посты" />
           <NavItem href="/#questions" text="Вопросы" />
         </div>
 

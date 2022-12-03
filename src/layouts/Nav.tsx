@@ -20,7 +20,7 @@ export const Nav = ({ links }: NavProps) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed transition border-b border-gray-500 bg-opacity-80 w-full z-10 backdrop-blur flex items-center justify-between px-4 py-2">
+    <nav className="fixed transition bg-white bg-opacity-80 w-full z-10 backdrop-blur flex items-center justify-between px-4 py-2">
       <Logo />
 
       <div className="flex items-center gap-2 text-xl">
@@ -28,7 +28,7 @@ export const Nav = ({ links }: NavProps) => {
           <Link
             key={l.label}
             href={l.href}
-            className="text-lg rounded-xl py-2 px-4 hover:bg-gray-200 hover:duration-500"
+            className="text-lg rounded-xl py-2 px-4 hover:text-pink-700 hover:duration-200"
           >
             {l.label}
           </Link>

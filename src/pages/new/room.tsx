@@ -55,12 +55,12 @@ const NewRoom = () => {
             >
               <AiOutlineArrowLeft size={24} />
             </Link>
-            <h2 className="text-center text-2xl">New Room</h2>
+            <h2 className="text-center text-2xl">Новый Пост</h2>
           </div>
           {/* Title */}
           <div>
             <label className="text-xl" htmlFor="title">
-              Title:
+              Название:
             </label>
             <input
               id="title"
@@ -73,7 +73,7 @@ const NewRoom = () => {
           {/* Description */}
           <div className="my-4">
             <label className="text-xl" htmlFor="description">
-              Description:
+              Содержание:
             </label>
             <input
               id="description"
@@ -85,7 +85,7 @@ const NewRoom = () => {
           {/* Hashtag */}
           <div>
             <label className="text-xl" htmlFor="hashtag">
-              Hashtag:
+              Хэштег:
             </label>
             <select
               {...register("hashtag")}
@@ -105,7 +105,7 @@ const NewRoom = () => {
           {/* Is Question */}
           <div>
             <label className="text-xl" htmlFor="isQuestion">
-              Is this post a question?
+              Пост является вопросом?
             </label>
             <input
               id="isQuestion"
@@ -121,7 +121,7 @@ const NewRoom = () => {
             type="submit"
             disabled={addRoom.isLoading}
           >
-            Add
+            Добавить
           </button>
           {/* Validation Error */}
           {addRoom.error && (
