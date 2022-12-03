@@ -11,7 +11,7 @@ type RoomItemProps = {
 export const RoomItem = ({ data }: RoomItemProps) => {
   return (
     <article
-      className="my-2 flex gap-2 flex-col border-[1px] border-gray-700 p-4 rounded-xl"
+      className="my-2 flex p-5 gap-2 flex-col bg-white rounded-xl"
       key={data.id}
     >
       <div className="flex items-center justify-between">
@@ -21,6 +21,7 @@ export const RoomItem = ({ data }: RoomItemProps) => {
         >
           <Avatar src={data.authorImage} size={32} />
           <span>{data.authorName || "ghost"}</span>
+          {/* <span>{data.authorRole}</span> */}
         </Link>
         <p className="text-gray-500">{`${data.updatedAt.toLocaleDateString()}, ${data.updatedAt.toLocaleTimeString()}`}</p>
       </div>

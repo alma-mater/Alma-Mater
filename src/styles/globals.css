@@ -5,5 +5,5 @@
 @tailwind utilities;
 
 #__next {
-  @apply text-gray-800 bg-[#FFFFFF] flex flex-col min-h-screen;
+  @apply text-gray-800 bg-[#eef5f7] flex flex-col min-h-screen;
 }

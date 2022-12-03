@@ -34,7 +34,8 @@ const RoomsSection = ({ session }: RoomSectionProps) => {
       {/* Header */}
       <div className="flex justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">Rooms</h1>
+          <a className="text-2xl font-semibold">Посты</a>
+          <a className="text-2xl font-semibold">Вопросы</a>
           <span className="text-gray-400">{count} available</span>
         </div>
 
