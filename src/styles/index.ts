@@ -3,7 +3,7 @@ const BUTTON =
 export const ACTION_BUTTON = `${BUTTON} bg-blue-500 hover:bg-blue-600`;
 export const DELETE_BUTTON = `${BUTTON} bg-red-400 hover:bg-red-500`;
 export const CARD =
-  "flex flex-col items-center border-[1px] border-gray-700 p-4 rounded-xl";
+  "flex flex-col items-center bg-white p-4 rounded-xl";
 export const HASHTAG = "text-xs rounded-xl border border-blue-500 p-2 mr-2";
 export const INPUT_TEXT =
   "my-1 w-full bg-transparent outline outline-[1px] outline-gray-500 rounded p-2";
@@ -11,4 +11,4 @@ export const TEXTAREA = `${INPUT_TEXT} resize-none h-[128px]`;
 export const INPUT_SELECT =
   "my-1 w-full bg-transparent outline outline-[1px] outline-gray-500 rounded p-2";
 export const NOTIFICATION =
-  "my-4 rounded-xl px-8 py-4 border-[1px] border-gray-700 text-center";
+  "my-4 rounded-xl px-8 py-4 bg-white text-center";

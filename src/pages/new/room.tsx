@@ -45,7 +45,7 @@ const NewRoom = () => {
 
   if (!session) return <>Yo u gotta sign in</>;
   return (
-    <div className="min-h-screen flex items-center">
+    <div className="flex justify-center items-center">
       <div className={`${CARD} justify-center my-4 max-w-[48ch] mx-auto`}>
         <form onSubmit={onSubmit}>
           <div className="grid grid-cols-3 items-center mb-3">
