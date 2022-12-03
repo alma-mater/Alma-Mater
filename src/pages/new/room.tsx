@@ -12,11 +12,13 @@ type FormData = {
   title: string;
   description: string;
   hashtag: object;
+  isQuestion: boolean;
 };
 
 const NewRoom = () => {
   const { register, handleSubmit } = useForm<FormData>();
   const [hashtagId, setHashtagId] = useState("");
+  const [isQuestion, setIsQuestion] = useState(false);
   const { data: session } = useSession();
   const router = useRouter();
   const utils = trpc.useContext();
@@ -36,6 +38,7 @@ const NewRoom = () => {
         authorImage: session?.user?.image || "/default-avatar.png",
         authorId: session?.user?.id || "",
         hashtagId,
+        isQuestion,
       });
     } catch {}
   });
@@ -75,7 +78,6 @@ const NewRoom = () => {
             <input
               id="description"
               {...register("description")}
-              type="text"
               className={INPUT_TEXT}
               disabled={addRoom.isLoading}
             />
@@ -99,6 +101,19 @@ const NewRoom = () => {
                   </option>
                 ))}
             </select>
+          </div>
+          {/* Is Question */}
+          <div>
+            <label className="text-xl" htmlFor="isQuestion">
+              Is this post a question?
+            </label>
+            <input
+              id="isQuestion"
+              {...register("isQuestion")}
+              type="checkbox"
+              checked={isQuestion}
+              onChange={() => setIsQuestion(!isQuestion)}
+            />
           </div>
           {/* Submit Form */}
           <button

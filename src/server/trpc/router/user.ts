@@ -14,6 +14,8 @@ const defaultUserSelect = Prisma.validator<Prisma.UserSelect>()({
   polyclinicId: true,
   rooms: true,
   Room: true,
+  role: true,
+  roleId: true,
 });
 
 export const userRouter = router({
@@ -40,7 +42,7 @@ export const userRouter = router({
           username: z.string().nullish(),
           polyclinicId: z.string().uuid().nullish(),
           bio: z.string().max(128).nullish(),
-          grade: z.string().min(2).max(3).nullish(),
+          roleId: z.string().uuid().nullish(),
         }),
       })
     )

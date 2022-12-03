@@ -15,6 +15,14 @@ model Polyclinic {
     updatedAt DateTime @unique @default(now()) @updatedAt
 }
 
+model Role {
+    id        String   @id @default(uuid())
+    name      String
+    users     User[]
+    createdAt DateTime @unique @default(now())
+    updatedAt DateTime @unique @default(now()) @updatedAt
+}
+
 model Picture {
     id        String   @id @default(uuid())
     filename  String
@@ -59,6 +67,7 @@ model Hashtag {
 
 model Room {
     id           String                @id @default(uuid())
+    isQuestion   Boolean               @default(false)
     title        String
     description  String
     authorName   String?
@@ -116,6 +125,8 @@ model User {
     Room          Room[]
     diaryPosts    DiaryPost[]
     pictures      Picture[]
+    role          Role?                 @relation(fields: [roleId], references: [id])
+    roleId        String?
 }
 
 model VerificationToken {
