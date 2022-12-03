@@ -6,11 +6,6 @@ const Hashtags = () => {
   const { data } = trpc.hashtag.all.useQuery();
   return (
     <div className="max-w-[60ch] mx-auto">
-      <h1 className={NOTIFICATION}>
-        Here is the list of all hashtags Almamater currently has. They
-        categorize the subject of a room, making it easy for you to find what
-        you need!
-      </h1>
       <div className={CARD}>
         {data?.map((t) => (
           <Link

@@ -17,36 +17,19 @@ const HAMBURGER_ITEM =
 export const HamburgerMenu = ({ session }: HamburgerMenuProps) => {
   return (
     <div className="flex flex-col absolute right-8 top-14 rounded bg-gray-100">
-      <Link href="/" className={HAMBURGER_ITEM}>
-        <IoList /> Главная
-      </Link>
       <Link href="/workspace" className={HAMBURGER_ITEM}>
-        <MdWorkOutline /> Workspace
+        <MdWorkOutline /> Беременность
       </Link>
       {session ? (
         <Link href={`/users/${session.user?.id}`} className={HAMBURGER_ITEM}>
-          <IoPerson /> Profile
+          <IoPerson /> Профиль
         </Link>
       ) : (
         <button className={HAMBURGER_ITEM} onClick={() => signIn()}>
-          <IoLogInOutline /> Sign In
+          <IoLogInOutline /> Войти
         </button>
       )}
       {/* Social Links */}
-      <div className="border-t-2 border-gray-400">
-        <a
-          href="https://github.com/Dositan/almamater/"
-          className={HAMBURGER_ITEM}
-        >
-          <FaGithub /> Github
-        </a>
-        <a
-          href="https://instagram.com/dastanozgeldi/"
-          className={HAMBURGER_ITEM}
-        >
-          <FaInstagram /> Instagram
-        </a>
-      </div>
     </div>
   );
 };

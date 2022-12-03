@@ -6,7 +6,7 @@ export const Hashtags = () => {
   const { data } = trpc.hashtag.getSome.useQuery({ limit: 5 });
 
   return (
-    <div className="hidden md:block w-[70%] bg-white p-5 rounded-xl">
+    <div className="hidden md:block bg-white p-5 rounded-xl">
       <h1 className="text-2xl font-semibold text-center">Хэштеги</h1>
       <ul>
         <Link
