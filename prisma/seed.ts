@@ -24,6 +24,7 @@ async function main() {
       id: firstPostId,
       title: "First Room",
       description: "This is an example room generated from `prisma/seed.ts`",
+      isQuestion: false,
     },
     update: {},
   });

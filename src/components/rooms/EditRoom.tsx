@@ -47,7 +47,7 @@ const EditRoom = ({ data, hashtags, session, router }: EditRoomProps) => {
   });
   const deleteRoom = trpc.room.delete.useMutation({
     async onSuccess() {
-      router.push("/feed");
+      router.push("/");
     },
   });
   const joinRoom = trpc.participant.join.useMutation({
