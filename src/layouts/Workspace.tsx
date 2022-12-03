@@ -13,7 +13,7 @@ export const Workspace = ({ children }: WorkspaceProps) => {
         >
           <IoCopy className="text-gray-400 w-5 h-5" />
           <span className="hidden md:block flex-1 ml-3 whitespace-nowrap">
-            Pictures
+            Картинки
           </span>
         </Link>
 
@@ -23,7 +23,7 @@ export const Workspace = ({ children }: WorkspaceProps) => {
         >
           <IoHome className="text-gray-400 w-5 h-5" />
           <span className="hidden md:block flex-1 ml-3 whitespace-nowrap">
-            Diary Posts
+            Дневник
           </span>
         </Link>
 
@@ -33,7 +33,7 @@ export const Workspace = ({ children }: WorkspaceProps) => {
         >
           <IoPerson className="text-gray-400 w-5 h-5" />
           <span className="hidden md:block flex-1 ml-3 whitespace-nowrap">
-            Connections
+            Друзья
           </span>
         </Link>
       </aside>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CARD, NOTIFICATION } from "styles";
+import { CARD } from "styles";
 import { trpc } from "utils/trpc";
 
 const Hashtags = () => {
