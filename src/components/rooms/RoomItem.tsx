@@ -5,7 +5,10 @@ import { HASHTAG } from "styles";
 import { Avatar } from "../common/Avatar";
 
 type RoomItemProps = {
-  data: Room & { participants: ParticipantsInRooms[]; hashtag: Hashtag | null };
+  data: Room & {
+    participants: ParticipantsInRooms[];
+    hashtag: Hashtag | null;
+  };
 };
 
 export const RoomItem = ({ data }: RoomItemProps) => {

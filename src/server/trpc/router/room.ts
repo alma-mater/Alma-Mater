@@ -5,6 +5,7 @@ import { publicProcedure, router } from "../trpc";
 
 const defaultRoomSelect = Prisma.validator<Prisma.RoomSelect>()({
   id: true,
+  isQuestion: true,
   title: true,
   description: true,
   authorName: true,
