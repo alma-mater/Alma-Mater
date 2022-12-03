@@ -10,7 +10,7 @@ export const Hashtags = () => {
       <h1 className="text-2xl font-semibold text-center">Хэштеги</h1>
       <ul>
         <Link
-          href="/feed"
+          href="/"
           className="flex items-center justify-between my-2 p-2 rounded-md hover:bg-gray-100 hover:duration-300"
         >
           <span className="text-xl p-2">Все</span>
@@ -21,7 +21,7 @@ export const Hashtags = () => {
             className="my-2 p-2 rounded-md hover:bg-gray-100 hover:duration-300"
           >
             <Link
-              href={`/feed/?hashtagId=${t.id}`}
+              href={`/?hashtagId=${t.id}`}
               className="flex items-center justify-between"
             >
               <div className="flex items-center">

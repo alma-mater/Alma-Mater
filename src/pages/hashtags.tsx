@@ -14,7 +14,7 @@ const Hashtags = () => {
       <div className={CARD}>
         {data?.map((t) => (
           <Link
-            href={`/feed/?hashtagId=${t.id}`}
+            href={`/?hashtagId=${t.id}`}
             className="flex items-center justify-between px-2 w-full rounded-md hover:bg-gray-200 hover:duration-300"
           >
             <div className="flex items-center gap-2 p-2 m-2">

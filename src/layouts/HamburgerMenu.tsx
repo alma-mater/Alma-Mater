@@ -17,8 +17,8 @@ const HAMBURGER_ITEM =
 export const HamburgerMenu = ({ session }: HamburgerMenuProps) => {
   return (
     <div className="flex flex-col absolute right-8 top-14 rounded bg-gray-100">
-      <Link href="/feed" className={HAMBURGER_ITEM}>
-        <IoList /> Feed
+      <Link href="/" className={HAMBURGER_ITEM}>
+        <IoList /> Главная
       </Link>
       <Link href="/workspace" className={HAMBURGER_ITEM}>
         <MdWorkOutline /> Workspace
