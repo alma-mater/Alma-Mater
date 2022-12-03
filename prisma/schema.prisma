@@ -1,0 +1,127 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Polyclinic {
+    id        String   @id @default(uuid())
+    name      String
+    users     User[]
+    createdAt DateTime @unique @default(now())
+    updatedAt DateTime @unique @default(now()) @updatedAt
+}
+
+model Picture {
+    id        String   @id @default(uuid())
+    filename  String
+    createdAt DateTime @default(now())
+    user      User     @relation(fields: [userId], references: [id])
+    userId    String
+    Room      Room?    @relation(fields: [roomId], references: [id])
+    roomId    String?
+}
+
+model DiaryPost {
+    id        String    @id @default(uuid())
+    title     String
+    content   String?
+    hashtag   Hashtag   @relation(fields: [hashtagId], references: [id])
+    hashtagId String
+    due       DateTime?
+    createdAt DateTime  @unique @default(now())
+    user      User      @relation(fields: [userId], references: [id])
+    userId    String
+    finished  Boolean   @default(false)
+}
+
+model ParticipantsInRooms {
+    room       Room     @relation(fields: [roomId], references: [id])
+    roomId     String
+    user       User     @relation(fields: [userId], references: [id])
+    userId     String
+    assignedAt DateTime @default(now())
+
+    @@id([roomId, userId])
+}
+
+model Hashtag {
+    id        String      @id @default(uuid())
+    name      String
+    image     String?
+    createdAt DateTime    @unique @default(now())
+    rooms     Room[]
+    DiaryPost DiaryPost[]
+}
+
+model Room {
+    id           String                @id @default(uuid())
+    title        String
+    description  String
+    authorName   String?
+    authorImage  String?
+    createdAt    DateTime              @unique @default(now())
+    updatedAt    DateTime              @unique @default(now()) @updatedAt
+    participants ParticipantsInRooms[]
+    author       User?                 @relation(fields: [authorId], references: [id])
+    authorId     String?
+    hashtag      Hashtag?              @relation(fields: [hashtagId], references: [id])
+    hashtagId    String?
+    pictures     Picture[]
+}
+
+// Necessary for Next auth
+model Account {
+    id                String  @id @default(cuid())
+    userId            String
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String? @db.Text
+    access_token      String? @db.Text
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? @db.Text
+    session_state     String?
+    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([provider, providerAccountId])
+}
+
+model Session {
+    id           String   @id @default(cuid())
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+    id            String                @id @default(cuid())
+    name          String?
+    username      String?               @unique
+    email         String?               @unique
+    emailVerified DateTime?
+    image         String?
+    bio           String?
+    polyclinic    Polyclinic?           @relation(fields: [polyclinicId], references: [id])
+    polyclinicId  String?
+    accounts      Account[]
+    sessions      Session[]
+    rooms         ParticipantsInRooms[]
+    Room          Room[]
+    diaryPosts    DiaryPost[]
+    pictures      Picture[]
+}
+
+model VerificationToken {
+    identifier String
+    token      String   @unique
+    expires    DateTime
+
+    @@unique([identifier, token])
+}
