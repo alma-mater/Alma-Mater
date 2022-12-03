@@ -27,7 +27,7 @@ export const Hashtags = () => {
               <div className="flex items-center">
                 <span className="text-xl p-2">#{t.name}</span>
               </div>
-              <span className="text-xl px-2 rounded bg-gray-100">
+              <span className="text-lg px-2 rounded bg-pink-500 text-white">
                 {t.rooms.length}
               </span>
             </Link>

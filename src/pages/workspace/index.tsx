@@ -27,7 +27,7 @@ const Pictures = () => {
           Здесь хранятся ваши картинки, сортированные по дате добавления.
         </h1>
         <Link href="/new/picture" className={`${ACTION_BUTTON} w-full`}>
-          Добавить Картинку
+          Добавить Изображение
         </Link>
         {pictures && pictures.length > 0 ? (
           <>
@@ -44,7 +44,12 @@ const Pictures = () => {
             ))}
           </>
         ) : (
-          <p className={NOTIFICATION}>У вас нет изображений на данный момент</p>
+          <div className="flex flex-col items-center mt-[50px]">
+            <img src="./think.svg" className="w-48 h-48 opacity-70"/>
+            <p className="text-gray-500 text-center">
+              Похоже, у вас нет изображений на данный момент
+            </p>
+          </div>
         )}
       </div>
     </Workspace>
