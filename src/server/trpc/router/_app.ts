@@ -1,6 +1,5 @@
 import { router } from "../trpc";
 import { diaryPostRouter } from "./diaryPost";
-import { newsRouter } from "./news";
 import { pictureRouter } from "./picture";
 import { participantRouter } from "./participant";
 import { roomRouter } from "./room";
@@ -10,7 +9,6 @@ import { userRouter } from "./user";
 
 export const appRouter = router({
   diaryPost: diaryPostRouter,
-  news: newsRouter,
   picture: pictureRouter,
   participant: participantRouter,
   room: roomRouter,

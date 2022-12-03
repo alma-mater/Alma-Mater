@@ -9,7 +9,6 @@ export const Layout = ({ children }: LayoutProps) => {
   const [mounted, setMounted] = useState(false);
   const links = [
     { label: "Беременность", href: "/workspace" },
-    { label: "Новости", href: "/news" },
   ];
 
   const [parent] = useAutoAnimate<HTMLDivElement>();
