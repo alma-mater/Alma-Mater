@@ -83,7 +83,7 @@ const EditProfile = () => {
           {/* Polyclinic */}
           <div className="my-4">
             <label className="text-xl" htmlFor="polyclinicId">
-              Polyclinic:
+              Поликлиника:
             </label>
             <select
               {...register("polyclinicId")}
@@ -103,7 +103,7 @@ const EditProfile = () => {
           {/* Bio */}
           <div className="my-4">
             <label className="text-xl" htmlFor="bio">
-              Bio:
+              О себе:
             </label>
             <textarea
               id="bio"
@@ -120,7 +120,7 @@ const EditProfile = () => {
             type="submit"
             disabled={editProfile.isLoading}
           >
-            Save
+            Сохранить
           </button>
 
           {editProfile.error && (

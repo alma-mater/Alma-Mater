@@ -115,7 +115,7 @@ const NewDiaryPost = () => {
           type="submit"
           disabled={addDiaryPost.isLoading}
         >
-          Add
+          Добавить
         </button>
         {/* Validation Error */}
         {addDiaryPost.error && (

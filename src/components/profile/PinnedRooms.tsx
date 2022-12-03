@@ -11,10 +11,9 @@ export const PinnedRooms = ({ id, polyclinicId }: PinnedRoomsProps) => {
     <div className="my-4">
       {/* Notification */}
       <h1 className={`${NOTIFICATION} mt-0 text-center`}>
-        This is the profile page. Here you can see some general information
-        about a user.
+        Это ваш профиль. Вы можете изменять его по своему желанию и быть самой крутой мамой!
       </h1>
-      <h1 className="text-2xl font-semibold text-center">Pinned Rooms</h1>
+      <h1 className="text-2xl font-semibold text-center">Закрепленные посты</h1>
       <ul>
         {roomsQuery.data ? (
           <>
@@ -23,7 +22,7 @@ export const PinnedRooms = ({ id, polyclinicId }: PinnedRoomsProps) => {
             ))}
           </>
         ) : (
-          <p className={NOTIFICATION}>No rooms found for this.</p>
+          <p className={NOTIFICATION}>У вас еще нет собраных постов</p>
         )}
       </ul>
     </div>

@@ -113,7 +113,7 @@ const EditRoom = ({ data, hashtags, session, router }: EditRoomProps) => {
           >
             <IoClose size={24} />
           </button>
-          <h2 className="text-center text-2xl leading-normal">Edit Room</h2>
+          <h2 className="text-center text-2xl leading-normal">Редактировать</h2>
           <div className="my-4">
             <label className="text-xl" htmlFor="title">
               Title:
@@ -171,7 +171,7 @@ const EditRoom = ({ data, hashtags, session, router }: EditRoomProps) => {
             onClick={() => console.log(hashtag)}
             disabled={editRoom.isLoading}
           >
-            Save
+            Сохранить
           </button>
           {/* Error occurred */}
           {editRoom.error && (
