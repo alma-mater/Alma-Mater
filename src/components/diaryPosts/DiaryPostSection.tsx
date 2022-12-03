@@ -16,10 +16,10 @@ export const DiaryPostSection = () => {
   return (
     <div className="lg:mx-4">
       <h1 className={`${NOTIFICATION} text-center`}>
-        DiaryPosts page. Here are your most recent things to do.
+        Diary Posts page. Here are your most recent things to do.
       </h1>
       <Link href="/new/diaryPost" className={`${ACTION_BUTTON} w-full`}>
-        Add DiaryPost
+        Add Diary Post
       </Link>
       {diaryPostsQuery.data?.pages.map((page, index) => (
         <>

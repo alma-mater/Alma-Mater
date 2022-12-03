@@ -22,8 +22,8 @@ export const Nav = ({ links }: NavProps) => {
   return (
     <nav className="fixed transition border-b border-gray-500 bg-opacity-80 w-full z-10 backdrop-blur flex items-center justify-between px-4 py-2">
       <Logo />
-      {/* Links */}
-      <div className="hidden md:flex items-center">
+
+      <div className="flex items-center gap-2 text-xl">
         {links.map((l) => (
           <Link
             key={l.label}
@@ -33,9 +33,6 @@ export const Nav = ({ links }: NavProps) => {
             {l.label}
           </Link>
         ))}
-      </div>
-
-      <div className="flex items-center gap-2 text-xl">
         <div className="hidden md:flex gap-2 items-center justify-around text-3xl md:text-4xl">
           {session ? (
             <Link
