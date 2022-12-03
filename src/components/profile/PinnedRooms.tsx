@@ -9,11 +9,6 @@ export const PinnedRooms = ({ id, polyclinicId }: PinnedRoomsProps) => {
 
   return (
     <div className="my-4">
-      {/* Notification */}
-      <h1 className={`${NOTIFICATION} mt-0 text-center`}>
-        This is the profile page. Here you can see some general information
-        about a user.
-      </h1>
       <h1 className="text-2xl font-semibold text-center">Pinned Rooms</h1>
       <ul>
         {roomsQuery.data ? (

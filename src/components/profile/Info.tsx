@@ -3,8 +3,7 @@ import type { User } from "@prisma/client";
 import { Avatar } from "components/common/Avatar";
 import Link from "next/link";
 import { GoSettings, GoSignOut } from "react-icons/go";
-import { IoPerson, IoSchool } from "react-icons/io5";
-import { MdForum } from "react-icons/md";
+import { FaHospital, FaQuestionCircle, FaSchool } from "react-icons/fa";
 import ReactMarkdown from "react-markdown";
 
 type InfoProps = { user?: (User & any) | null; session: Session | null };
@@ -43,12 +42,18 @@ export const Info = ({ user, session }: InfoProps) => {
       <div className="flex items-center justify-between my-4 gap-2">
         {user?.polyclinic && (
           <div className={`${PROFILE} text-center`}>
-            <IoSchool className="w-7 h-7" />
+            <FaHospital className="w-7 h-7" />
             {user.polyclinic.name}
           </div>
         )}
+        {user?.role && (
+          <div className={`${PROFILE} text-center`}>
+            <FaSchool className="w-7 h-7" />
+            {user.role.name}
+          </div>
+        )}
         <div className={PROFILE}>
-          <MdForum className="w-7 h-7" />
+          <FaQuestionCircle className="w-7 h-7" />
           {user?.Room.length}
         </div>
       </div>
