@@ -5,7 +5,6 @@ import { FaGithub, FaInstagram } from "react-icons/fa";
 import {
   IoList,
   IoLogInOutline,
-  IoNewspaperOutline,
   IoPerson,
 } from "react-icons/io5";
 import { MdWorkOutline } from "react-icons/md";
@@ -23,9 +22,6 @@ export const HamburgerMenu = ({ session }: HamburgerMenuProps) => {
       </Link>
       <Link href="/workspace" className={HAMBURGER_ITEM}>
         <MdWorkOutline /> Workspace
-      </Link>
-      <Link href="/news" className={HAMBURGER_ITEM}>
-        <IoNewspaperOutline /> News
       </Link>
       {session ? (
         <Link href={`/users/${session.user?.id}`} className={HAMBURGER_ITEM}>
