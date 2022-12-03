@@ -6,8 +6,35 @@ import { trpc } from "utils/trpc";
 import { IoAdd } from "react-icons/io5";
 import { useRouter } from "next/router";
 import { RoomItem } from "components/rooms/RoomItem";
+import cn from 'classnames';
 
 type RoomSectionProps = { session: Session | null };
+
+type NavItemProps = {
+  href: string;
+  text: string;
+};
+
+const NavItem = ({ href, text }: NavItemProps) => {
+  const { asPath } = useRouter();
+  const isActive = asPath === href;
+
+  return (
+    <Link href={href} legacyBehavior>
+      <a
+        className={cn(
+          isActive
+            ? "font-bold text-gray-800 text-xl border-b-black border-b-[3px]"
+            : "text-gray-600",
+          "p-1 mx-3 transition-all"
+        )}
+      >
+        {text}
+      </a>
+    </Link>
+  );
+};
+
 
 const RoomsSection = ({ session }: RoomSectionProps) => {
   const { query } = useRouter();
@@ -34,9 +61,8 @@ const RoomsSection = ({ session }: RoomSectionProps) => {
       {/* Header */}
       <div className="flex justify-between">
         <div>
-          <a className="text-2xl font-semibold">Посты</a>
-          <a className="text-2xl font-semibold">Вопросы</a>
-          <span className="text-gray-400">{count} available</span>
+          <NavItem href='/' text="Посты" />
+          <NavItem href='/workspace' text="Вопросы" />
         </div>
 
         {session && (
@@ -44,7 +70,7 @@ const RoomsSection = ({ session }: RoomSectionProps) => {
             href="/new/room"
             className={`${ACTION_BUTTON} flex items-center gap-2`}
           >
-            <IoAdd className="w-6 h-6" /> Add Room
+            <IoAdd className="w-6 h-6" /> Создать
           </Link>
         )}
       </div>
@@ -71,10 +97,10 @@ const RoomsSection = ({ session }: RoomSectionProps) => {
         }
       >
         {roomsQuery.isFetchingPreviousPage
-          ? "Loading more..."
+          ? "Загрузка..."
           : roomsQuery.hasPreviousPage
-          ? "Load More"
-          : "Nothing more to load"}
+          ? "Показать больше"
+          : "Нет постов"}
       </button>
     </div>
   );
