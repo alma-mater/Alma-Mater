@@ -67,6 +67,7 @@ model Hashtag {
 
 model Room {
     id           String                @id @default(uuid())
+    isQuestion   Boolean               @default(false)
     title        String
     description  String
     authorName   String?

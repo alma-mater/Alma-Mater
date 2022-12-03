@@ -6,7 +6,7 @@ import { trpc } from "utils/trpc";
 import { IoAdd } from "react-icons/io5";
 import { useRouter } from "next/router";
 import { RoomItem } from "components/rooms/RoomItem";
-import cn from 'classnames';
+import cn from "classnames";
 
 type RoomSectionProps = { session: Session | null };
 
@@ -24,7 +24,7 @@ const NavItem = ({ href, text }: NavItemProps) => {
       <a
         className={cn(
           isActive
-            ? "font-bold text-gray-800 text-xl border-b-black border-b-[3px]"
+            ? "font-bold text-gray-800 text-lg border-b-black border-b-[3px]"
             : "text-gray-600",
           "p-1 mx-3 transition-all"
         )}
@@ -35,34 +35,32 @@ const NavItem = ({ href, text }: NavItemProps) => {
   );
 };
 
-
 const RoomsSection = ({ session }: RoomSectionProps) => {
-  const { query } = useRouter();
+  const { query, asPath } = useRouter();
   const hashtagId = query.hashtagId as string;
+  const isQuestion = asPath === "/#questions" ? true : false;
 
   const roomsQuery = hashtagId
     ? trpc.room.infiniteByHashtagId.useInfiniteQuery(
-        { limit: 5, hashtagId },
+        { limit: 5, hashtagId, isQuestion },
         {
           getPreviousPageParam: (lastPage) => lastPage.nextCursor,
         }
       )
     : trpc.room.infinite.useInfiniteQuery(
-        { limit: 5 },
+        { limit: 5, isQuestion },
         {
           getPreviousPageParam: (lastPage) => lastPage.nextCursor,
         }
       );
-
-  const { data: count } = trpc.room.getCount.useQuery();
 
   return (
     <div className="w-full">
       {/* Header */}
       <div className="flex justify-between">
         <div>
-          <NavItem href='/' text="Посты" />
-          <NavItem href='/workspace' text="Вопросы" />
+          <NavItem href="/#posts" text="Посты" />
+          <NavItem href="/#questions" text="Вопросы" />
         </div>
 
         {session && (
