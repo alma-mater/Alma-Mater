@@ -153,7 +153,7 @@ const ViewRoom = () => {
         <p className="my-2">{room.description}</p>
         <div className="flex items-center justify-between my-2">
           <p className="text-gray-400">
-            Created {room.createdAt.toLocaleDateString("en-us")}
+            Создано в {room.createdAt.toLocaleDateString("en-us")}
           </p>
         </div>
         <EditRoom

@@ -9,14 +9,14 @@ export const Search = () => {
           type="search"
           id="default-search"
           className="p-4 pl-12 w-full text-sm rounded-lg border border-gray-700"
-          placeholder="Search Rooms, Users..."
+          placeholder="Поиск..."
           required
         />
         <button
           type="submit"
           className="absolute right-2.5 bottom-2.5 text-gray-100 bg-blue-500 hover:bg-blue-600 hover:duration-500 focus:outline-none font-medium rounded-lg text-sm px-4 py-2"
         >
-          Search
+          Поиск
         </button>
       </div>
     </form>
