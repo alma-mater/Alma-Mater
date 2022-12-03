@@ -1,16 +1,21 @@
 import { trpc } from "utils/trpc";
 import { signIn, useSession } from "next-auth/react";
-import Head from "next/head";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { ACTION_BUTTON } from "styles";
 
-const AddMessageForm = ({ onMessagePost }: { onMessagePost: () => void }) => {
+type AddMessageFormProps = {
+  onMessagePost: () => void;
+  roomId: string;
+};
+
+const AddMessageForm = ({ onMessagePost, roomId }: AddMessageFormProps) => {
   const addMessage = trpc.message.add.useMutation();
   const { data: session } = useSession();
   const [content, setContent] = useState("");
   const [enterToPostMessage, setEnterToPostMessage] = useState(true);
   async function postMessage() {
     try {
-      await addMessage.mutateAsync({ content });
+      await addMessage.mutateAsync({ content, roomId });
       setContent("");
       onMessagePost();
     } catch {}
@@ -21,85 +26,80 @@ const AddMessageForm = ({ onMessagePost }: { onMessagePost: () => void }) => {
   const userName = session?.user?.name;
   if (!userName) {
     return (
-      <div className="flex justify-between w-full px-3 py-2 text-lg text-gray-200 bg-gray-800 rounded">
+      <div className="flex justify-between w-full px-3 py-2 text-lg bg-gray-100 rounded">
         <p className="font-bold">
-          You have to{" "}
+          Вы должны быть{" "}
           <button
             className="inline font-bold underline"
             onClick={() => signIn()}
           >
-            sign in
+            зарегистрированы
           </button>{" "}
-          to write.
+          чтобы написать.
         </p>
         <button
           onClick={() => signIn()}
           data-testid="signin"
-          className="h-full px-4 bg-indigo-500 rounded"
+          className={ACTION_BUTTON}
         >
-          Sign In
+          Регистрация
         </button>
       </div>
     );
   }
   return (
-    <>
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          await postMessage();
-        }}
-      >
-        <fieldset disabled={addMessage.isLoading} className="min-w-0">
-          <div className="flex items-end w-full px-3 py-2 text-lg bg-gray-100 rounded">
-            <textarea
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              className="flex-1 bg-transparent outline-0"
-              rows={content.split(/\r|\n/).length}
-              id="text"
-              name="text"
-              autoFocus
-              onKeyDown={async (e) => {
-                if (e.key === "Shift") {
-                  setEnterToPostMessage(false);
-                }
-                if (e.key === "Enter" && enterToPostMessage) {
-                  postMessage();
-                }
-                isTyping.mutate({ typing: true });
-              }}
-              onKeyUp={(e) => {
-                if (e.key === "Shift") {
-                  setEnterToPostMessage(true);
-                }
-              }}
-              onBlur={() => {
+    <form
+      onSubmit={async (e) => {
+        e.preventDefault();
+        await postMessage();
+      }}
+    >
+      <fieldset disabled={addMessage.isLoading} className="min-w-0">
+        <div className="flex items-end w-full px-3 py-2 text-lg bg-gray-100 rounded">
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            className="flex-1 bg-transparent outline-0"
+            rows={content.split(/\r|\n/).length}
+            id="text"
+            name="text"
+            autoFocus
+            onKeyDown={async (e) => {
+              if (e.key === "Shift") {
+                setEnterToPostMessage(false);
+              }
+              if (e.key === "Enter" && enterToPostMessage) {
+                postMessage();
+              }
+              isTyping.mutate({ typing: true });
+            }}
+            onKeyUp={(e) => {
+              if (e.key === "Shift") {
                 setEnterToPostMessage(true);
-                isTyping.mutate({ typing: false });
-              }}
-            />
-            <div>
-              <button
-                type="submit"
-                className="px-4 py-1 text-gray-200 bg-indigo-500 rounded"
-              >
-                Submit
-              </button>
-            </div>
+              }
+            }}
+            onBlur={() => {
+              setEnterToPostMessage(true);
+              isTyping.mutate({ typing: false });
+            }}
+          />
+          <div>
+            <button type="submit" className={ACTION_BUTTON}>
+              Submit
+            </button>
           </div>
-        </fieldset>
-        {addMessage.error && (
-          <p style={{ color: "red" }}>{addMessage.error.message}</p>
-        )}
-      </form>
-    </>
+        </div>
+      </fieldset>
+      {addMessage.error && (
+        <p style={{ color: "red" }}>{addMessage.error.message}</p>
+      )}
+    </form>
   );
 };
 
-export const Messages = () => {
+export const Messages = ({ roomId }: { roomId: string }) => {
   const messagesQuery = trpc.message.infinite.useInfiniteQuery(
-    {},
+    { roomId },
     {
       getPreviousPageParam: (d) => d.prevCursor,
     }
@@ -114,7 +114,6 @@ export const Messages = () => {
     return msgs;
   });
   type Message = NonNullable<typeof messages>[number];
-  const { data: session } = useSession();
   const scrollTargetRef = useRef<HTMLDivElement>(null);
 
   // fn to add and dedupe new messages onto state
@@ -173,62 +172,59 @@ export const Messages = () => {
   });
 
   return (
-    <>
-      <Head>
-        <title>Prisma Starter</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <section className="rounded-xl flex flex-col justify-end h-full p-4 space-y-4 bg-white">
-        <div className="space-y-4 overflow-y-auto">
-          <button
-            data-testid="loadMore"
-            onClick={() => fetchPreviousPage()}
-            disabled={!hasPreviousPage || isFetchingPreviousPage}
-            className="px-4 py-2 text-gray-200 bg-indigo-500 rounded disabled:opacity-40"
-          >
-            {isFetchingPreviousPage
-              ? "Loading more..."
-              : hasPreviousPage
-              ? "Load More"
-              : "Nothing more to load"}
-          </button>
-          <div className="space-y-4">
-            {messages?.map((item) => (
-              <article key={item.id}>
-                <header className="flex space-x-2 text-sm">
-                  <h3 className="text-md">
-                    <a
-                      href={`/users/${item.authorId}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {item.authorName}
-                    </a>
-                  </h3>
-                  <span className="text-gray-500">
-                    {new Intl.DateTimeFormat("en-GB", {
-                      dateStyle: "short",
-                      timeStyle: "short",
-                    }).format(item.createdAt)}
-                  </span>
-                </header>
-                <p className="text-xl leading-tight whitespace-pre-line">
-                  {item.content}
-                </p>
-              </article>
-            ))}
-            <div ref={scrollTargetRef}></div>
-          </div>
+    <section className="rounded-xl flex flex-col justify-end h-full p-4 space-y-4 bg-white">
+      <div className="space-y-4 overflow-y-auto">
+        <button
+          data-testid="loadMore"
+          onClick={() => fetchPreviousPage()}
+          disabled={!hasPreviousPage || isFetchingPreviousPage}
+          className={ACTION_BUTTON}
+        >
+          {isFetchingPreviousPage
+            ? "Загружаем побольше..."
+            : hasPreviousPage
+            ? "Загрузить больше"
+            : "Нечего загружать"}
+        </button>
+        <div className="space-y-4">
+          {messages?.map((item) => (
+            <article key={item.id}>
+              <header className="flex space-x-2 text-sm">
+                <h3 className="text-md">
+                  <a
+                    href={`/users/${item.authorId}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {item.authorName}
+                  </a>
+                </h3>
+                <span className="text-gray-500">
+                  {new Intl.DateTimeFormat("en-GB", {
+                    dateStyle: "short",
+                    timeStyle: "short",
+                  }).format(item.createdAt)}
+                </span>
+              </header>
+              <p className="text-xl leading-tight whitespace-pre-line">
+                {item.content}
+              </p>
+            </article>
+          ))}
+          <div ref={scrollTargetRef}></div>
         </div>
-        <div className="w-full">
-          <AddMessageForm onMessagePost={() => scrollToBottomOfList()} />
-          <p className="h-2 italic text-gray-400">
-            {currentlyTyping.length
-              ? `${currentlyTyping.join(", ")} typing...`
-              : ""}
-          </p>
-        </div>
-      </section>
-    </>
+      </div>
+      <div className="w-full">
+        <AddMessageForm
+          roomId={roomId}
+          onMessagePost={() => scrollToBottomOfList()}
+        />
+        <p className="h-2 italic text-gray-400">
+          {currentlyTyping.length
+            ? `${currentlyTyping.join(", ")} typing...`
+            : ""}
+        </p>
+      </div>
+    </section>
   );
 };

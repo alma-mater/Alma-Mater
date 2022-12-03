@@ -9,7 +9,7 @@
     "build:4-next": "cross-env NODE_ENV=production next build",
     "build": "run-s build:*",
     "dev:next": "next dev",
-    "dev:wss": "cross-env PORT=3001 tsx watch src/server/trpc/wssDevServer.ts --tsconfig tsconfig.server.json",
+    "dev:ws": "ts-node-dev --project tsconfig.server.json --respawn --transpile-only src/server/trpc/wssDevServer.ts",
     "dev": "run-p dev:*",
     "db-up": "docker-compose up -d",
     "db-seed": "prisma db seed",

@@ -103,7 +103,7 @@ const SentPictures = ({
       {picturesQuery.data?.map((picture) => (
         <a
           className={`${CARD} m-2 w-full text-left`}
-          href={`${BUCKET_URL}/pictures/${userId}/${picture.id}`}
+          href={`${BUCKET_URL}/pictures/${picture.userId}/${picture.id}`}
         >
           {picture.filename}
         </a>
@@ -164,7 +164,7 @@ const ViewRoom = () => {
           router={router}
         />
         <SentPictures roomId={room.id} userId={session?.user?.id as string} />
-        <Messages />
+        <Messages roomId={id} />
       </div>
     </Page>
   );

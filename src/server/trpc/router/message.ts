@@ -84,18 +84,18 @@ export const messageRouter = router({
   infinite: publicProcedure
     .input(
       z.object({
+        roomId: z.string().uuid(),
         cursor: z.date().nullish(),
         take: z.number().min(1).max(50).nullish(),
       })
     )
     .query(async ({ input, ctx }) => {
       const take = input.take ?? 10;
-      const cursor = input.cursor;
+      const { roomId, cursor } = input;
 
       const page = await ctx.prisma.message.findMany({
-        orderBy: {
-          createdAt: "desc",
-        },
+        where: { roomId },
+        orderBy: { createdAt: "desc" },
         cursor: cursor ? { createdAt: cursor } : undefined,
         take: take + 1,
         skip: 0,
