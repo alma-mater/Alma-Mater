@@ -21,10 +21,13 @@ const Feed = () => {
   return (
     <Page className="m-2" title="Feed">
       <MobileHeader />
-      {/* Main Feed */}
-      <div className="my-8 block md:grid md:grid-cols-3 md:justify-items-center">
-        <RoomsSection session={session} />
-        <Hashtags />
+      <div className="my-8 block md:flex md:justify-around">
+        <div className="md:w-[60%]">
+          <RoomsSection session={session} />
+        </div>
+        <div className="md:w-[30%]">
+          <Hashtags />
+        </div>
       </div>
     </Page>
   );
