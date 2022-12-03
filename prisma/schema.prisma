@@ -7,6 +7,19 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+model Message {
+    id          String   @id @default(uuid())
+    content     String
+    createdAt   DateTime @unique @default(now())
+    updatedAt   DateTime @unique @default(now())
+    author      User?    @relation(fields: [authorId], references: [id])
+    authorId    String?
+    authorName  String?
+    authorImage String?
+    room        Room?    @relation(fields: [roomId], references: [id])
+    roomId      String?
+}
+
 model Polyclinic {
     id        String   @id @default(uuid())
     name      String
@@ -80,6 +93,7 @@ model Room {
     hashtag      Hashtag?              @relation(fields: [hashtagId], references: [id])
     hashtagId    String?
     pictures     Picture[]
+    Message      Message[]
 }
 
 // Necessary for Next auth
@@ -127,6 +141,7 @@ model User {
     pictures      Picture[]
     role          Role?                 @relation(fields: [roleId], references: [id])
     roleId        String?
+    Message       Message[]
 }
 
 model VerificationToken {

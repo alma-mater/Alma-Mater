@@ -8,6 +8,7 @@ import { Page } from "layouts/Page";
 import EditRoom from "components/rooms/EditRoom";
 import { Avatar } from "components/common/Avatar";
 import { trpc } from "utils/trpc";
+import { Messages } from "components/rooms/Messages";
 
 const Participants = ({ roomId }: { roomId: string }) => {
   const { data: participants } = trpc.participant.all.useQuery({ roomId });
@@ -163,6 +164,7 @@ const ViewRoom = () => {
           router={router}
         />
         <SentPictures roomId={room.id} userId={session?.user?.id as string} />
+        <Messages />
       </div>
     </Page>
   );

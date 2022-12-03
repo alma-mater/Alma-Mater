@@ -7,6 +7,7 @@ import { polyclinicRouter } from "./polyclinic";
 import { hashtagRouter } from "./hashtag";
 import { userRouter } from "./user";
 import { roleRouter } from "./role";
+import { messageRouter } from "./message";
 
 export const appRouter = router({
   diaryPost: diaryPostRouter,
@@ -17,6 +18,7 @@ export const appRouter = router({
   hashtag: hashtagRouter,
   user: userRouter,
   role: roleRouter,
+  message: messageRouter,
 });
 
 // export type definition of API

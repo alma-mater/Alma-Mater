@@ -14,12 +14,13 @@ export const DiaryPostSection = () => {
   );
 
   return (
-    <div className="lg:mx-4">
+    <div className="lg:mx-4 max-w-[48ch] mx-auto">
       <h1 className={`${NOTIFICATION} text-center`}>
-        Diary Posts page. Here are your most recent things to do.
+        Вкладка записей вашего дневника. Запечатляйте всякие моменты в период
+        вашего положения!
       </h1>
       <Link href="/new/diaryPost" className={`${ACTION_BUTTON} w-full`}>
-        Add Diary Post
+        Добавить Запись в Дневник
       </Link>
       {diaryPostsQuery.data?.pages.map((page, index) => (
         <>
@@ -30,7 +31,7 @@ export const DiaryPostSection = () => {
               ))}
             </div>
           ) : (
-            <p className="my-4">No diaryPosts yet.</p>
+            <p className="my-4">Ваш дневник пуст.</p>
           )}
         </>
       ))}
@@ -44,10 +45,10 @@ export const DiaryPostSection = () => {
         }
       >
         {diaryPostsQuery.isFetchingPreviousPage
-          ? "Loading more..."
+          ? "Загружаем побольше..."
           : diaryPostsQuery.hasPreviousPage
-          ? "Load More"
-          : "Nothing more to load"}
+          ? "Загрузить больше"
+          : "Нечего загружать"}
       </button>
     </div>
   );
