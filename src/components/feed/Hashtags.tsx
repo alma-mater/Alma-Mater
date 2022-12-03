@@ -6,8 +6,8 @@ export const Hashtags = () => {
   const { data } = trpc.hashtag.getSome.useQuery({ limit: 5 });
 
   return (
-    <div className="hidden md:block w-[70%]">
-      <h1 className="text-2xl font-semibold text-center">Browse Hashtags</h1>
+    <div className="hidden md:block w-[70%] bg-white p-5 rounded-xl">
+      <h1 className="text-2xl font-semibold text-center">Хэштеги</h1>
       <ul>
         <Link
           href="/feed"
@@ -25,10 +25,7 @@ export const Hashtags = () => {
               className="flex items-center justify-between"
             >
               <div className="flex items-center">
-                {t.image && (
-                  <img src={t.image} alt="hashtag image" width={24} height={24} />
-                )}
-                <span className="text-xl p-2">{t.name}</span>
+                <span className="text-xl p-2">#{t.name}</span>
               </div>
               <span className="text-xl px-2 rounded bg-gray-100">
                 {t.rooms.length}
