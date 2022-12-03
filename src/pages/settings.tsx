@@ -1,18 +1,17 @@
-import type { School } from "@prisma/client";
+import type { Polyclinic } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { CARD, INPUT_SELECT, INPUT_TEXT, TEXTAREA } from "styles";
+import { CARD, INPUT_SELECT, TEXTAREA } from "styles";
 import { trpc } from "utils/trpc";
 
 type FormData = {
   username: string;
   bio: string;
-  schoolId: string;
-  grade: string;
+  polyclinicId: string;
 };
 
 const EditProfile = () => {
@@ -20,7 +19,9 @@ const EditProfile = () => {
   // States
   const [username, setUsername] = useState<string | null | undefined>(null);
   const [bio, setBio] = useState<string | null | undefined>(null);
-  const [schoolId, setSchoolId] = useState<string | null | undefined>(null);
+  const [polyclinicId, setPolyclinicId] = useState<string | null | undefined>(
+    null
+  );
   const [grade, setGrade] = useState<string | null | undefined>(null);
   // Form
   const { register, handleSubmit } = useForm<FormData>();
@@ -28,7 +29,7 @@ const EditProfile = () => {
   const { data: session } = useSession();
   const id = session?.user?.id as string;
   const { data: user } = trpc.user.info.useQuery({ id });
-  const { data: schools } = trpc.school.all.useQuery();
+  const { data: polyclinics } = trpc.polyclinic.all.useQuery();
 
   const utils = trpc.useContext();
   const editProfile = trpc.user.edit.useMutation({
@@ -42,7 +43,7 @@ const EditProfile = () => {
     try {
       await editProfile.mutateAsync({
         id,
-        data: { username, bio, schoolId, grade },
+        data: { username, bio, polyclinicId, grade },
       });
     } catch {}
   });
@@ -50,8 +51,7 @@ const EditProfile = () => {
   useEffect(() => {
     setUsername(user?.username);
     setBio(user?.bio);
-    setSchoolId(user?.schoolId);
-    setGrade(user?.grade);
+    setPolyclinicId(user?.polyclinicId);
   }, []);
 
   if (!session) return <>Yo u gotta sign in</>;
@@ -80,41 +80,26 @@ const EditProfile = () => {
               onChange={(e) => setUsername(e.currentTarget.value)}
             />
           </div>
-          {/* School */}
+          {/* Polyclinic */}
           <div className="my-4">
-            <label className="text-xl" htmlFor="schoolId">
-              School:
+            <label className="text-xl" htmlFor="polyclinicId">
+              Polyclinic:
             </label>
             <select
-              {...register("schoolId")}
-              id="schoolId"
+              {...register("polyclinicId")}
+              id="polyclinicId"
               className={INPUT_SELECT}
-              onChange={(e) => setSchoolId(e.currentTarget.value)}
+              onChange={(e) => setPolyclinicId(e.currentTarget.value)}
             >
-              <option selected>Choose a school</option>
-              {schools &&
-                schools.map((s: School) => (
+              <option selected>Choose a polyclinic</option>
+              {polyclinics &&
+                polyclinics.map((s: Polyclinic) => (
                   <option key={s.id} value={s.id}>
                     {s.name}
                   </option>
                 ))}
             </select>
           </div>
-          {/* Grade */}
-          <div>
-            <label className="text-xl" htmlFor="grade">
-              Grade:
-            </label>
-            <input
-              id="grade"
-              {...register("grade")}
-              className={INPUT_TEXT}
-              value={grade || ""}
-              onChange={(e) => setGrade(e.currentTarget.value)}
-              disabled={editProfile.isLoading}
-            />
-          </div>
-
           {/* Bio */}
           <div className="my-4">
             <label className="text-xl" htmlFor="bio">

@@ -16,7 +16,7 @@ export const UserProfile = ({ user }: { user: User & any }) => {
       <div className="w-full px-4">
         <Info user={user} session={session} />
       </div>
-      <PinnedRooms id={user?.id} schoolId={user?.schoolId || ""} />
+      <PinnedRooms id={user?.id} polyclinicId={user?.polyclinicId || ""} />
       <DiaryPostSection />
     </Page>
   ) : (

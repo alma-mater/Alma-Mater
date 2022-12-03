@@ -32,7 +32,7 @@ const Connections = () => {
   const { data: user } = trpc.user.info.useQuery({ id });
   const { data: connections } = trpc.user.connections.useQuery({
     id,
-    schoolId: user?.schoolId || "",
+    polyclinicId: user?.polyclinicId || "",
   });
   if (status === "loading") {
     return "Loading or not authenticated...";

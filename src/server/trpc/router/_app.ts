@@ -4,7 +4,7 @@ import { newsRouter } from "./news";
 import { pictureRouter } from "./picture";
 import { participantRouter } from "./participant";
 import { roomRouter } from "./room";
-import { schoolRouter } from "./school";
+import { polyclinicRouter } from "./polyclinic";
 import { hashtagRouter } from "./hashtag";
 import { userRouter } from "./user";
 
@@ -14,7 +14,7 @@ export const appRouter = router({
   picture: pictureRouter,
   participant: participantRouter,
   room: roomRouter,
-  school: schoolRouter,
+  polyclinic: polyclinicRouter,
   hashtag: hashtagRouter,
   user: userRouter,
 });

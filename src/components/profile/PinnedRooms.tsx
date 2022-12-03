@@ -2,9 +2,9 @@ import { RoomItem } from "components/rooms/RoomItem";
 import { NOTIFICATION } from "styles";
 import { trpc } from "utils/trpc";
 
-type PinnedRoomsProps = { id: string; schoolId: string };
+type PinnedRoomsProps = { id: string; polyclinicId: string };
 
-export const PinnedRooms = ({ id, schoolId }: PinnedRoomsProps) => {
+export const PinnedRooms = ({ id, polyclinicId }: PinnedRoomsProps) => {
   const roomsQuery = trpc.room.pinnedRooms.useQuery({ authorId: id });
 
   return (
