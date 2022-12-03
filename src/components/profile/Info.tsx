@@ -47,12 +47,6 @@ export const Info = ({ user, session }: InfoProps) => {
             {user.polyclinic.name}
           </div>
         )}
-        {user?.grade && (
-          <div className={PROFILE}>
-            <IoPerson className="w-7 h-7" />
-            {user.grade}
-          </div>
-        )}
         <div className={PROFILE}>
           <MdForum className="w-7 h-7" />
           {user?.Room.length}

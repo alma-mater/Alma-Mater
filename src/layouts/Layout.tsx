@@ -6,14 +6,11 @@ import { Nav } from "./Nav";
 type LayoutProps = { children: React.ReactNode };
 
 export const Layout = ({ children }: LayoutProps) => {
-  const [mounted, setMounted] = useState(false);
   const links = [
     { label: "Беременность", href: "/workspace" },
   ];
 
   const [parent] = useAutoAnimate<HTMLDivElement>();
-
-  useEffect(() => setMounted(true), []);
 
   return (
     <>
