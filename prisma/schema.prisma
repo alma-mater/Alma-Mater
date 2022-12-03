@@ -72,7 +72,6 @@ model ParticipantsInRooms {
 model Hashtag {
     id        String      @id @default(uuid())
     name      String
-    image     String?
     createdAt DateTime    @unique @default(now())
     rooms     Room[]
     DiaryPost DiaryPost[]

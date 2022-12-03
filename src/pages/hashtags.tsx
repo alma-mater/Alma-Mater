@@ -5,7 +5,7 @@ import { trpc } from "utils/trpc";
 const Hashtags = () => {
   const { data } = trpc.hashtag.all.useQuery();
   return (
-    <div className="max-w-[60ch] mx-auto">
+    <div className="md:max-w-[60ch] mx-auto">
       <div className={CARD}>
         {data?.map((t) => (
           <Link
@@ -18,7 +18,7 @@ const Hashtags = () => {
               )}
               #{t.name}
             </div>
-            <span className="text-xl px-2 rounded bg-gray-100">
+            <span className="text-lg text-white px-2 rounded bg-pink-500">
               {t.rooms.length}
             </span>
           </Link>

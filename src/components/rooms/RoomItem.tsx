@@ -35,10 +35,10 @@ export const RoomItem = ({ data }: RoomItemProps) => {
         {data.title}
       </Link>
       <p className="text-gray-400">{data.description}</p>
-      <div className="my-2 flex justify-between">
-        <span className={`${HASHTAG} flex items-center gap-2`}>
+      <div className="my-2 flex justify-between font-semibold">
+        <span className={`flex items-center gap-2`}>
           <IoPeople className="w-5 h-5" />
-          {data.participants.length} participants
+          {data.participants.length}
         </span>
         {data.hashtag && (
           <span
