@@ -35,7 +35,7 @@ const Pictures = () => {
               <div className={`${CARD} my-4`}>
                 <a
                   className="text-xl"
-                  href={`${BUCKET_URL}/pictures/${userId}/${picture.id}`}
+                  href={`${BUCKET_URL}/pictures/${picture.userId}/${picture.id}`}
                 >
                   {picture.filename}
                 </a>
