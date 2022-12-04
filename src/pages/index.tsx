@@ -32,9 +32,11 @@ const Feed = () => {
         <div className="max-w-[32ch] mx-auto w-full">
           <Hashtags />
         </div>
-        <RoomsSection session={session} />
-        <div className="max-w-[32ch] mx-auto w-full">
-          <Specialists />
+        {/* <div> */}
+          <RoomsSection session={session} />
+          <div className="max-w-[32ch] mx-auto w-full">
+            <Specialists />
+          {/* </div> */}
         </div>
       </div>
     </Page>

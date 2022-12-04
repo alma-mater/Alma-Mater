@@ -1,13 +1,11 @@
 import type { Session } from "next-auth";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { FaGithub, FaInstagram } from "react-icons/fa";
 import {
-  IoList,
   IoLogInOutline,
   IoPerson,
 } from "react-icons/io5";
-import { MdWorkOutline } from "react-icons/md";
+import { MdWorkOutline, MdShoppingCart } from "react-icons/md";
 
 type HamburgerMenuProps = { session: Session | null };
 
@@ -17,6 +15,9 @@ const HAMBURGER_ITEM =
 export const HamburgerMenu = ({ session }: HamburgerMenuProps) => {
   return (
     <div className="flex flex-col absolute right-8 top-14 rounded bg-gray-100">
+      <Link href="/shop" className={HAMBURGER_ITEM}>
+        <MdShoppingCart /> Магазин
+      </Link>
       <Link href="/workspace" className={HAMBURGER_ITEM}>
         <MdWorkOutline /> Беременность
       </Link>

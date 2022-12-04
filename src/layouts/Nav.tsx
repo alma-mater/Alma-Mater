@@ -2,7 +2,6 @@ import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 import { BiLogInCircle } from "react-icons/bi";
-import { FaDiscord, FaGithub } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HamburgerMenu } from "./HamburgerMenu";
 import { Logo } from "./Logo";
