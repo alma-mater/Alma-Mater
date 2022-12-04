@@ -28,7 +28,7 @@ export const Nav = ({ links }: NavProps) => {
           <Link
             key={l.label}
             href={l.href}
-            className="text-lg rounded-xl py-2 px-4 hover:text-pink-700 hover:duration-200"
+            className="text-lg rounded-xl md:flex hidden py-2 px-4 hover:text-pink-700 hover:duration-200"
           >
             {l.label}
           </Link>
