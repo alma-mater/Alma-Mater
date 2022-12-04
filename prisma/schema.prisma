@@ -7,6 +7,19 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+model Review {
+    id           String     @id @default(uuid())
+    title        String
+    content      String
+    createdAt    DateTime   @unique @default(now())
+    updatedAt    DateTime   @unique @default(now()) @updatedAt
+    author       User       @relation(fields: [authorId], references: [id])
+    authorId     String
+    likes        Int        @default(0)
+    polyclinic   Polyclinic @relation(fields: [polyclinicId], references: [id])
+    polyclinicId String
+}
+
 model Chat {
     id           String                @id @default(uuid())
     createdAt    DateTime              @unique @default(now())
@@ -47,10 +60,13 @@ model Message {
 
 model Polyclinic {
     id        String   @id @default(uuid())
+    image     String?
     name      String
+    about     String?
     users     User[]
     createdAt DateTime @unique @default(now())
     updatedAt DateTime @unique @default(now()) @updatedAt
+    reviews   Review[]
 }
 
 model Picture {
@@ -161,6 +177,7 @@ model User {
     role          UserRole              @default(PREGNANT)
     ChatMessage   ChatMessage[]
     Chat          Chat[]
+    Review        Review[]
 }
 
 enum UserRole {

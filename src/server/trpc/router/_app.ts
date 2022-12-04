@@ -9,6 +9,7 @@ import { userRouter } from "./user";
 import { messageRouter } from "./message";
 import { chatRouter } from "./chat";
 import { chatMessageRouter } from "./chatMessage";
+import { reviewRouter } from "./review";
 
 export const appRouter = router({
   diaryPost: diaryPostRouter,
@@ -21,6 +22,7 @@ export const appRouter = router({
   message: messageRouter,
   chat: chatRouter,
   chatMessage: chatMessageRouter,
+  review: reviewRouter,
 });
 
 // export type definition of API
