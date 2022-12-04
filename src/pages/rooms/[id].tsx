@@ -16,7 +16,7 @@ const Participants = ({ roomId }: { roomId: string }) => {
   return (
     <div className={`${CARD} my-2`}>
       <h1 className="my-2 text-2xl font-semibold text-center">
-        Participants - {participants?.length}
+        Участников - {participants?.length}
       </h1>
       <div className="w-full flex flex-nowrap gap-1 overflow-x-scroll">
         {participants &&
@@ -62,7 +62,7 @@ const SentPictures = ({
       return;
     }
 
-    setUploadingStatus("Uploading the file to AWS S3");
+    setUploadingStatus("Загрузка...");
 
     const { url, fields }: { url: string; fields: any } =
       (await createPresignedUrl({
@@ -98,7 +98,7 @@ const SentPictures = ({
   return (
     <div className={`${CARD} my-2`}>
       <h1 className="my-2 text-2xl font-semibold text-center">
-        Pictures Sent - {picturesQuery.data?.length}
+        Изображении - {picturesQuery.data?.length}
       </h1>
       {picturesQuery.data?.map((picture) => (
         <a
@@ -116,7 +116,7 @@ const SentPictures = ({
         <input ref={fileRef} type="file" onChange={(e) => selectFile(e)} />
         {file && (
           <button type="submit" className={`${ACTION_BUTTON} my-2`}>
-            Upload a File!
+            Загрузить файл!
           </button>
         )}
         {uploadingStatus && <p>{uploadingStatus}</p>}
@@ -150,19 +150,19 @@ const ViewRoom = () => {
     <Page title={room.title}>
       <div className="my-4 lg:my-0 max-w-[60ch] mx-auto">
         <Participants roomId={room.id} />
-        <h1 className="text-4xl font-extrabold">{room.title}</h1>
-        <p className="my-2">{room.description}</p>
-        <div className="flex items-center justify-between my-2">
-          <p className="text-gray-400">
-            Создано в {room.createdAt.toLocaleDateString("en-us")}
-          </p>
+          <h1 className="text-4xl font-extrabold">{room.title}</h1>
+          <p className="my-2">{room.description}</p>
+          <div className="flex items-center justify-between my-2">
+            <p className="text-gray-400">
+              Создано в {room.createdAt.toLocaleDateString("en-us")}
+            </p>
         </div>
-        <EditRoom
-          data={room}
-          hashtags={hashtags}
-          session={session}
-          router={router}
-        />
+          <EditRoom
+            data={room}
+            hashtags={hashtags}
+            session={session}
+            router={router}
+          />
         <SentPictures roomId={room.id} userId={session?.user?.id as string} />
         <Messages roomId={id} />
       </div>
