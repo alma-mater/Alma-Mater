@@ -3,9 +3,11 @@ import type { User } from "@prisma/client";
 import { Avatar } from "components/common/Avatar";
 import Link from "next/link";
 import { BsFillChatRightDotsFill } from "react-icons/bs";
-import { BiEdit } from "react-icons/bi";
-import { FaHospital, FaQuestionCircle, FaSchool } from "react-icons/fa";
+import { AiOutlineEdit } from "react-icons/ai";
+import { TbBabyCarriage } from "react-icons/tb";
 import ReactMarkdown from "react-markdown";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { GiHospitalCross } from "react-icons/gi";
 
 type InfoProps = { user?: (User & any) | null; session: Session | null };
 
@@ -23,7 +25,7 @@ export const Info = ({ user, session }: InfoProps) => {
               href="/settings"
               className="absolute top-5 left-2 hover:text-blue-500 duration-500"
             >
-              <BiEdit className="w-12 h-12" />
+              <AiOutlineEdit className="w-12 h-12" />
             </Link>
             {user?.role === "SPECIALIST" && user?.id !== session?.user?.id && (
               <Link
@@ -45,16 +47,16 @@ export const Info = ({ user, session }: InfoProps) => {
       <div className="flex items-center justify-between my-4 gap-2">
         {user?.polyclinic && (
           <div className={`${PROFILE} text-center`}>
-            <FaHospital className="w-7 h-7" />
+            <GiHospitalCross className="w-7 h-7" />
             {user.polyclinic.name}
           </div>
         )}
-        <div className={`${PROFILE} text-center`}>
-          <FaSchool className="w-7 h-7" />
+        <div className={`${PROFILE} text-center lowercase`}>
+          <TbBabyCarriage className="w-7 h-7" />
           {user?.role}
         </div>
         <div className={PROFILE}>
-          <FaQuestionCircle className="w-7 h-7" />
+          <AiOutlineQuestionCircle className="w-7 h-7" />
           {user?.Room.length}
         </div>
       </div>
