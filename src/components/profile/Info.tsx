@@ -2,7 +2,8 @@ import type { Session } from "next-auth";
 import type { User } from "@prisma/client";
 import { Avatar } from "components/common/Avatar";
 import Link from "next/link";
-import { GoSettings, GoSignOut } from "react-icons/go";
+import { GoSignOut } from "react-icons/go";
+import { BiEdit } from 'react-icons/bi'
 import { FaHospital, FaQuestionCircle, FaSchool } from "react-icons/fa";
 import ReactMarkdown from "react-markdown";
 
@@ -13,7 +14,7 @@ export const PROFILE =
 
 export const Info = ({ user, session }: InfoProps) => {
   return (
-    <div className="my-4 border-[1px] rounded-[10px] border-gray-700 p-4 h-max">
+    <div className="my-4 bg-white rounded-[10px]  p-4 h-max">
       <div className="relative flex justify-around items-center">
         {/* Settings */}
         {session?.user?.id === user?.id && (
@@ -22,7 +23,7 @@ export const Info = ({ user, session }: InfoProps) => {
               href="/settings"
               className="absolute top-5 left-2 hover:text-blue-500 duration-500"
             >
-              <GoSettings className="w-12 h-12" />
+              <BiEdit className="w-12 h-12" />
             </Link>
             <Link
               href="/api/auth/signout"
@@ -60,7 +61,7 @@ export const Info = ({ user, session }: InfoProps) => {
 
       {user?.bio && (
         <>
-          <p className="text-xl">Bio</p>
+          <p className="text-xl">О себе</p>
           <p className="border-[1px] border-gray-700 p-4 rounded-[10px] text-lg">
             <ReactMarkdown>{user.bio}</ReactMarkdown>
           </p>

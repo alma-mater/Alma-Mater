@@ -64,7 +64,7 @@ const EditProfile = () => {
 
   if (!session) return <>Yo u gotta sign in</>;
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="max-h-screen flex items-center justify-center">
       <div className={`my-10 flex items-center justify-center ${CARD}`}>
         <form className="w-[90%] relative" onSubmit={onSubmit}>
           <Link
@@ -73,11 +73,11 @@ const EditProfile = () => {
           >
             <AiOutlineArrowLeft size={24} />
           </Link>
-          <h2 className="text-center text-2xl leading-normal">Settings</h2>
+          <h2 className="text-center text-2xl leading-normal">Редактировать</h2>
           {/* Username */}
           <div className="my-4">
             <label className="text-xl" htmlFor="username">
-              Username:
+              Имя пользователя:
             </label>
             <input
               {...register("username")}
@@ -91,7 +91,7 @@ const EditProfile = () => {
           {/* Role */}
           <div className="my-4">
             <label className="text-xl" htmlFor="polyclinicId">
-              Role:
+              Вы:
             </label>
             <select
               {...register("polyclinicId")}
