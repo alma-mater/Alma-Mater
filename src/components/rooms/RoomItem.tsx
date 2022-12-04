@@ -5,6 +5,7 @@ import { MdPregnantWoman, MdWork } from "react-icons/md";
 import { HASHTAG } from "styles";
 import { trpc } from "utils/trpc";
 import { Avatar } from "../common/Avatar";
+import { useState } from 'react'
 
 type RoomItemProps = {
   data: Room & {
@@ -16,6 +17,7 @@ type RoomItemProps = {
 };
 
 export const RoomItem = ({ data, refetch }: RoomItemProps) => {
+  const [isLiked, setIsLiked] = useState(false)
   const likeRoom = trpc.room.like.useMutation({
     onSuccess: () => {
       refetch();
@@ -48,8 +50,11 @@ export const RoomItem = ({ data, refetch }: RoomItemProps) => {
       <div className="my-2 flex justify-between font-semibold">
         <div className="flex items-center gap-2">
           <button
-            className="flex items-center gap-2"
-            onClick={() => likeRoom.mutateAsync({ id: data.id })}
+            className={isLiked ? `flex items-center gap-2 text-red-500 pointer-events-none` : `flex items-center gap-2`}
+            onClick={() => {
+              likeRoom.mutateAsync({ id: data.id })
+              setIsLiked(true)
+            }}
           >
             <IoHeart className="w-5 h-5 hover:text-red-500 hover:duration-300" />
             {data.likes}
