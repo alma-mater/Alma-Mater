@@ -37,7 +37,7 @@ export const Workspace = ({ children }: WorkspaceProps) => {
           </span>
         </Link>
       </div>
-      <div className="w-[60%]">{children}</div>
+      <div className="md:w-[60%] flex justify-center">{children}</div>
     </div>
   );
 };
