@@ -1,11 +1,11 @@
-import { Message } from "@prisma/client";
+import { ChatMessage } from "@prisma/client";
 import { observable } from "@trpc/server/observable";
 import { EventEmitter } from "events";
 import { z } from "zod";
 import { protectedProcedure, publicProcedure, router } from "../trpc";
 
 interface MyEvents {
-  add: (data: Message) => void;
+  add: (data: ChatMessage) => void;
   isTypingUpdate: () => void;
 }
 declare interface MyEventEmitter {
@@ -42,18 +42,18 @@ const interval = setInterval(() => {
 }, 3e3);
 process.on("SIGTERM", () => clearInterval(interval));
 
-export const messageRouter = router({
+export const chatMessageRouter = router({
   add: protectedProcedure
     .input(
       z.object({
         id: z.string().uuid().optional(),
         content: z.string().min(1),
-        roomId: z.string().uuid().nullish(),
+        chatId: z.string().uuid().nullish(),
       })
     )
     .mutation(async ({ input, ctx }) => {
       const { id, name, image } = ctx.session.user;
-      const message = await ctx.prisma.message.create({
+      const chatMessage = await ctx.prisma.chatMessage.create({
         data: {
           ...input,
           authorId: id,
@@ -61,10 +61,10 @@ export const messageRouter = router({
           authorImage: image,
         },
       });
-      ee.emit("add", message);
+      ee.emit("add", chatMessage);
       delete currentlyTyping[name as string];
       ee.emit("isTypingUpdate");
-      return message;
+      return chatMessage;
     }),
 
   isTyping: protectedProcedure
@@ -84,17 +84,17 @@ export const messageRouter = router({
   infinite: publicProcedure
     .input(
       z.object({
-        roomId: z.string().uuid().optional(),
+        chatId: z.string().uuid().optional(),
         cursor: z.date().nullish(),
         take: z.number().min(1).max(50).nullish(),
       })
     )
     .query(async ({ input, ctx }) => {
-      const { roomId, cursor } = input;
+      const { chatId, cursor } = input;
       const take = input.take ?? 10;
 
-      const page = await ctx.prisma.message.findMany({
-        where: { roomId },
+      const page = await ctx.prisma.chatMessage.findMany({
+        where: { chatId },
         orderBy: { createdAt: "desc" },
         cursor: cursor ? { createdAt: cursor } : undefined,
         take: take + 1,
@@ -114,8 +114,8 @@ export const messageRouter = router({
     }),
 
   onAdd: publicProcedure.subscription(() => {
-    return observable<Message>((emit) => {
-      const onAdd = (data: Message) => emit.next(data);
+    return observable<ChatMessage>((emit) => {
+      const onAdd = (data: ChatMessage) => emit.next(data);
       ee.on("add", onAdd);
       return () => {
         ee.off("add", onAdd);

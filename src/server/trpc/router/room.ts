@@ -17,9 +17,23 @@ const defaultRoomSelect = Prisma.validator<Prisma.RoomSelect>()({
   authorId: true,
   hashtagId: true,
   hashtag: true,
+  likes: true,
 });
 
 export const roomRouter = router({
+  like: publicProcedure
+    .input(
+      z.object({
+        id: z.string().uuid(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { id } = input;
+      await ctx.prisma.room.update({
+        where: { id },
+        data: { likes: { increment: 1 } },
+      });
+    }),
   infinite: publicProcedure
     .input(
       z.object({
