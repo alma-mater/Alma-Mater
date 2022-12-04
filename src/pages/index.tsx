@@ -4,6 +4,7 @@ import RoomsSection from "components/feed/RoomsSection";
 import { Page } from "layouts/Page";
 import { Hashtags } from "components/feed/Hashtags";
 import { Specialists } from "components/feed/Specialists";
+import { Search } from "components/feed/Search";
 
 const MobileHeader = () => (
   <div className="md:hidden flex items-center justify-center gap-2 my-4">
@@ -28,14 +29,16 @@ const Feed = () => {
   return (
     <Page className="m-2" title="Feed">
       <MobileHeader />
-      <div className="my-8 block md:flex md:justify-between gap-10 w-full">
+      <div className="my-4 block md:flex md:justify-between gap-10 w-full">
         <div className="max-w-[32ch] mx-auto w-full">
           <Hashtags />
         </div>
-        {/* <div> */}
+        <div className="space-y-4">
+          <Search />
           <RoomsSection session={session} />
-          <div className="max-w-[32ch] mx-auto w-full">
-            <Specialists />
+        </div>
+        <div className="max-w-[32ch] mx-auto w-full">
+          <Specialists />
           {/* </div> */}
         </div>
       </div>
