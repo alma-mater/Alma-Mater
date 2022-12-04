@@ -14,7 +14,9 @@ const defaultPolyclinicSelect = Prisma.validator<Prisma.PolyclinicSelect>()({
 });
 
 export const polyclinicRouter = router({
-  all: publicProcedure.query(({ ctx }) => ctx.prisma.polyclinic.findMany()),
+  all: publicProcedure.query(({ ctx }) =>
+    ctx.prisma.polyclinic.findMany({ orderBy: { createdAt: "desc" } })
+  ),
 
   info: publicProcedure
     .input(
