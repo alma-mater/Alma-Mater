@@ -7,7 +7,7 @@ type PageProps = {
 };
 
 export const Page = ({ children, className = "", title }: PageProps) => {
-  const t = `${title} | Almamater`;
+  const t = `${title} | Alma Mater`;
   return (
     <>
       {title && (

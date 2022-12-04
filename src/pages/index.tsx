@@ -27,7 +27,7 @@ const Feed = () => {
   const { data: session } = useSession();
 
   return (
-    <Page className="m-2" title="Feed">
+    <Page className="m-2" title="Главная">
       <MobileHeader />
       <div className="my-4 block md:flex md:justify-between gap-10 w-full">
         <div className="max-w-[32ch] mx-auto w-full">

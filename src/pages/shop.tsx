@@ -3,7 +3,7 @@ import { NOTIFICATION } from "styles";
 
 const ShopItem = ({ shop }: any) => {
   return (
-    <div className="max-w-[50%] mt-10 bg-white p-4 mx-auto rounded-xl">
+    <div className="w-[70%] mt-10 bg-white p-4 mx-auto rounded-xl">
       <div className="flex justify-center">
         <img src={shop.image} />
       </div>
@@ -37,7 +37,7 @@ const Shop = ({ shop }: any) => {
       </h1>
       <div className="grid md:grid-cols-3 grid-cols-1">
         {shop.map((s: any) => (
-          <ShopItem key={s.shop} shop={s} />
+          <ShopItem key={s.title} shop={s} />
         ))}
       </div>
     </>
