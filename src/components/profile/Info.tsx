@@ -2,13 +2,9 @@ import type { Session } from "next-auth";
 import type { User } from "@prisma/client";
 import { Avatar } from "components/common/Avatar";
 import Link from "next/link";
-import { BsFillChatRightDotsFill } from "react-icons/bs";
-import { AiOutlineEdit } from "react-icons/ai";
 import ReactMarkdown from "react-markdown";
 import { trpc } from "utils/trpc";
 import { useRouter } from "next/router";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
-import { GiHospitalCross } from "react-icons/gi";
 
 type InfoProps = { user?: (User & any) | null; session: Session | null };
 
