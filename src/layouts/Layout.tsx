@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Nav } from "./Nav";
 
@@ -7,6 +6,7 @@ type LayoutProps = { children: React.ReactNode };
 
 export const Layout = ({ children }: LayoutProps) => {
   const links = [
+    { label: "Магазин", href: "/shop" },
     { label: "Беременность", href: "/workspace" },
   ];
 

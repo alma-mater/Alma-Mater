@@ -13,7 +13,7 @@ async function main() {
 
   await prisma.hashtag.upsert({
     where: { id: hashtagId },
-    create: { id: hashtagId, name: "Physics" },
+    create: { id: hashtagId, name: "Pregnancy" },
     update: {},
   });
   await prisma.room.upsert({
@@ -22,9 +22,11 @@ async function main() {
     },
     create: {
       id: firstPostId,
-      title: "First Room",
-      description: "This is an example room generated from `prisma/seed.ts`",
+      authorName: "Наталья",
+      title: "Первый месяц беременности",
+      description: "что посоветуете? какие медикаменты принимать?",
       isQuestion: false,
+      hashtagId,
     },
     update: {},
   });

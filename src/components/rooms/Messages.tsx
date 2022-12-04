@@ -85,7 +85,7 @@ const AddMessageForm = ({ onMessagePost, roomId }: AddMessageFormProps) => {
           />
           <div>
             <button type="submit" className={ACTION_BUTTON}>
-              Submit
+              Отправить
             </button>
           </div>
         </div>
