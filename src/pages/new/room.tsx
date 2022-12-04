@@ -38,7 +38,7 @@ const NewRoom = () => {
         ...data,
         authorName: user?.name || "unknown",
         authorImage: user?.image || "/default-avatar.png",
-        authorRole: user?.newRole || "PREGNANT",
+        authorRole: user?.role || "PREGNANT",
         authorId: user?.id || "",
         hashtagId,
         isQuestion,
@@ -107,7 +107,7 @@ const NewRoom = () => {
           </div>
           {/* Is Question */}
           <div>
-          <input
+            <input
               id="isQuestion"
               {...register("isQuestion")}
               type="checkbox"

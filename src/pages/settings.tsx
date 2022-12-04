@@ -1,4 +1,4 @@
-import { Polyclinic, Role } from "@prisma/client";
+import { Polyclinic, UserRole } from "@prisma/client";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -12,7 +12,7 @@ type FormData = {
   username: string;
   bio: string;
   polyclinicId: string;
-  role: any;
+  role: "PREGNANT" | "SPECIALIST";
 };
 
 const EditProfile = () => {
@@ -23,7 +23,7 @@ const EditProfile = () => {
   const [polyclinicId, setPolyclinicId] = useState<string | null | undefined>(
     null
   );
-  const [roleId, setRoleId] = useState<string | null | undefined>(null);
+  const [role, setRole] = useState<UserRole | null | undefined>("PREGNANT");
   // Form
   const { register, handleSubmit } = useForm<FormData>();
   // tRPC
@@ -31,7 +31,6 @@ const EditProfile = () => {
   const id = session?.user?.id as string;
   const { data: user } = trpc.user.info.useQuery({ id });
   const { data: polyclinics } = trpc.polyclinic.all.useQuery();
-  const { data: roles } = trpc.role.all.useQuery();
 
   const utils = trpc.useContext();
   const editProfile = trpc.user.edit.useMutation({
@@ -49,7 +48,7 @@ const EditProfile = () => {
           username,
           bio,
           polyclinicId,
-          roleId,
+          role: role || "PREGNANT",
         },
       });
     } catch {}
@@ -59,7 +58,7 @@ const EditProfile = () => {
     setUsername(user?.username);
     setBio(user?.bio);
     setPolyclinicId(user?.polyclinicId);
-    setRoleId(user?.roleId);
+    setRole(user?.role);
   }, []);
 
   if (!session) return <>Yo u gotta sign in</>;
@@ -88,23 +87,19 @@ const EditProfile = () => {
               onChange={(e) => setUsername(e.currentTarget.value)}
             />
           </div>
-          {/* Role */}
+          {/* UserRole */}
           <div className="my-4">
-            <label className="text-xl" htmlFor="polyclinicId">
+            <label className="text-xl" htmlFor="role">
               Вы:
             </label>
             <select
-              {...register("polyclinicId")}
-              id="polyclinicId"
+              {...register("role")}
+              id="role"
               className={INPUT_SELECT}
-              onChange={(e) => setPolyclinicId(e.currentTarget.value)}
+              onChange={(e) => setRole(e.currentTarget.value as UserRole)}
             >
-              {roles &&
-                roles.map((s: Role) => (
-                  <option key={s.id} value={s.id}>
-                    {s.name}
-                  </option>
-                ))}
+              <option value="PREGNANT">Pregnant</option>
+              <option value="SPECIALIST">Specialist</option>
             </select>
           </div>
           {/* Polyclinic */}

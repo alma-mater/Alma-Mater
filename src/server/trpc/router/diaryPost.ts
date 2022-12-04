@@ -9,7 +9,6 @@ const defaultDiaryPostSelect = Prisma.validator<Prisma.DiaryPostSelect>()({
   content: true,
   hashtag: true,
   user: true,
-  due: true,
   createdAt: true,
 });
 
@@ -48,9 +47,7 @@ export const diaryPostRouter = router({
         hashtagId: z.string().uuid(),
         userId: z.string().cuid(),
         title: z.string(),
-        due: z.date().optional(),
         content: z.string().optional(),
-        finished: z.boolean().optional(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -68,7 +65,6 @@ export const diaryPostRouter = router({
           hashtagId: z.string().uuid(),
           title: z.string().min(1).max(64),
           content: z.string().optional(),
-          finished: z.boolean().optional(),
         }),
       })
     )
@@ -117,14 +113,5 @@ export const diaryPostRouter = router({
         });
       }
       return diaryPost;
-    }),
-  finish: publicProcedure
-    .input(z.object({ id: z.string().uuid() }))
-    .query(async ({ ctx, input }) => {
-      const { id } = input;
-      await ctx.prisma.diaryPost.update({
-        where: { id },
-        data: { finished: true },
-      });
     }),
 });

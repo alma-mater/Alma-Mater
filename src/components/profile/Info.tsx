@@ -16,7 +16,7 @@ export const PROFILE =
 
 export const Info = ({ user, session }: InfoProps) => {
   return (
-    <div className="my-4 bg-white rounded-[10px]  p-4 h-max">
+    <div className="my-4 bg-white rounded-[10px] p-4 h-max">
       <div className="relative flex justify-around items-center">
         {/* Settings */}
         {session?.user?.id === user?.id && (
@@ -27,15 +27,14 @@ export const Info = ({ user, session }: InfoProps) => {
             >
               <AiOutlineEdit className="w-12 h-12" />
             </Link>
-            {user?.newRole === "SPECIALIST" &&
-              user?.id !== session?.user?.id && (
-                <Link
-                  href={`/chat/${user?.id}`}
-                  className="absolute top-5 right-2 hover:text-blue-500 duration-500"
-                >
-                  <BsFillChatRightDotsFill className="w-12 h-12" />
-                </Link>
-              )}
+            {user?.role === "SPECIALIST" && user?.id !== session?.user?.id && (
+              <Link
+                href={`/chat/${user?.id}`}
+                className="absolute top-5 right-2 hover:text-blue-500 duration-500"
+              >
+                <BsFillChatRightDotsFill className="w-12 h-12" />
+              </Link>
+            )}
           </>
         )}
         <div className="flex flex-col items-center justify-center">
@@ -52,12 +51,10 @@ export const Info = ({ user, session }: InfoProps) => {
             {user.polyclinic.name}
           </div>
         )}
-        {user?.newRole && (
-          <div className={`${PROFILE} text-center`}>
-            <TbBabyCarriage className="w-7 h-7" />
-            {user.newRole.toLowerCase()}
-          </div>
-        )}
+        <div className={`${PROFILE} text-center lowercase`}>
+          <TbBabyCarriage className="w-7 h-7" />
+          {user?.role}
+        </div>
         <div className={PROFILE}>
           <AiOutlineQuestionCircle className="w-7 h-7" />
           {user?.Room.length}
