@@ -50,12 +50,12 @@ const NewDiaryPost = () => {
           >
             <AiOutlineArrowLeft size={24} />
           </Link>
-          <h2 className="text-center text-2xl">New Diary Post</h2>
+          <h2 className="text-center text-2xl">Новая Запись</h2>
         </div>
         {/* Title */}
         <div className="my-2">
           <label className="text-xl" htmlFor="title">
-            Title:
+            Название:
           </label>
           <input
             id="title"
@@ -68,7 +68,7 @@ const NewDiaryPost = () => {
         {/* Content */}
         <div className="my-2">
           <label className="text-xl" htmlFor="content">
-            Content:
+            Контент:
           </label>
           <textarea
             id="content"
@@ -80,7 +80,7 @@ const NewDiaryPost = () => {
         {/* Hashtag */}
         <div className="my-2">
           <label className="text-xl" htmlFor="hashtag">
-            Hashtag:
+            Хэштег:
           </label>
           <select
             {...register("hashtagId")}
@@ -100,7 +100,7 @@ const NewDiaryPost = () => {
         {/* Due Date */}
         <div className="my-2">
           <label className="text-xl block" htmlFor="hashtag">
-            Due Date:
+            Дата:
           </label>
           <input
             {...register("due")}

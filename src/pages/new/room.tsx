@@ -107,16 +107,17 @@ const NewRoom = () => {
           </div>
           {/* Is Question */}
           <div>
-            <label className="text-xl" htmlFor="isQuestion">
-              Пост является вопросом?
-            </label>
-            <input
+          <input
               id="isQuestion"
               {...register("isQuestion")}
               type="checkbox"
               checked={isQuestion}
               onChange={() => setIsQuestion(!isQuestion)}
+              className="mr-2 h-5 w-5"
             />
+            <label className="text-xl" htmlFor="isQuestion">
+              Пост является вопросом?
+            </label>
           </div>
           {/* Submit Form */}
           <button
