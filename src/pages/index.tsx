@@ -33,7 +33,7 @@ const Feed = () => {
         <div className="max-w-[32ch] mx-auto w-full">
           <Hashtags />
         </div>
-        <div className="space-y-4">
+        <div className="space-y-4 min-w-[60ch]">
           <Search />
           <RoomsSection session={session} />
         </div>
