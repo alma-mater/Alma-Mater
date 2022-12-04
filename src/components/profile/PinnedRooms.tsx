@@ -20,7 +20,7 @@ export const PinnedRooms = ({ id, polyclinicId }: PinnedRoomsProps) => {
         {roomsQuery.data ? (
           <>
             {roomsQuery.data.map((item: any) => (
-              <div className="rounded-xl drop-shadow-2xl w-full">
+              <div className="rounded-xl drop-shadow-xl w-full">
                 <RoomItem key={item.id} data={item} refetch={() => null} />
               </div>
             ))}
