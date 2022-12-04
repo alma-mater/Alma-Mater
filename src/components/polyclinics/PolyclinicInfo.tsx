@@ -7,14 +7,14 @@ type PolyclinicInfoProps = {
 
 export const PolyclinicInfo = ({ polyclinic }: PolyclinicInfoProps) => {
   return (
-    <div className={CARD}>
+    <div className="md:border-r p-4">
       <img
-        className="w-48 h-48 object-cover rounded-xl"
+        className="w-full rounded-xl"
         src={polyclinic?.image || ""}
         alt="Polyclinic Image"
       />
-      <h1 className="border text-red-500">{polyclinic?.name}</h1>
-      <p>{polyclinic?.about}</p>
+      <h1 className="font-bold text-2xl mt-2 text-center">{polyclinic?.name}</h1>
+      <p className="mt-2 text-lg">{polyclinic?.about}</p>
     </div>
   );
 };
