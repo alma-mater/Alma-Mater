@@ -9,15 +9,15 @@ export const UserProfile = ({ user }: { user: User & any }) => {
   const { data: session } = useSession();
 
   return user?.id && user.id === session?.user?.id ? (
-    <Page
-      title="Profile"
-      className="xl:grid xl:grid-cols-3 xl:justify-items-center"
-    >
-      <div className="w-full px-4">
-        <Info user={user} session={session} />
+    <Page title="Profile" className="">
+      <div className="w-full p-4 bg-white rounded-xl flex justify-start min-h-screen">
+        <div className="w-[30%] border-r">
+          <Info user={user} session={session} />
+        </div>
+        <div className="w-[70%]">
+          <PinnedRooms id={user?.id} polyclinicId={user?.polyclinicId || ""} />
+        </div>
       </div>
-      <PinnedRooms id={user?.id} polyclinicId={user?.polyclinicId || ""} />
-      <DiaryPostSection />
     </Page>
   ) : (
     <Page title="Profile" className="max-w-[48ch] w-full mx-auto">
