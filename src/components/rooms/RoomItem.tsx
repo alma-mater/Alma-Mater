@@ -1,8 +1,9 @@
 import type { ParticipantsInRooms, Room, Hashtag } from "@prisma/client";
 import Link from "next/link";
-import { IoPeople } from "react-icons/io5";
+import { IoHeart, IoPeople } from "react-icons/io5";
 import { MdPregnantWoman, MdWork } from "react-icons/md";
 import { HASHTAG } from "styles";
+import { trpc } from "utils/trpc";
 import { Avatar } from "../common/Avatar";
 
 type RoomItemProps = {
@@ -11,9 +12,16 @@ type RoomItemProps = {
     hashtag: Hashtag | null;
     authorRole: string;
   };
+  refetch: () => void;
 };
 
-export const RoomItem = ({ data }: RoomItemProps) => {
+export const RoomItem = ({ data, refetch }: RoomItemProps) => {
+  const likeRoom = trpc.room.like.useMutation({
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
   return (
     <article
       className="my-2 flex p-5 gap-2 flex-col bg-white rounded-xl"
@@ -38,10 +46,19 @@ export const RoomItem = ({ data }: RoomItemProps) => {
       </Link>
       <p className="text-gray-400">{data.description}</p>
       <div className="my-2 flex justify-between font-semibold">
-        <span className={`flex items-center gap-2`}>
-          <IoPeople className="w-5 h-5" />
-          {data.participants.length}
-        </span>
+        <div className="flex items-center gap-2">
+          <button
+            className="flex items-center gap-2"
+            onClick={() => likeRoom.mutateAsync({ id: data.id })}
+          >
+            <IoHeart className="w-5 h-5 hover:text-red-500 hover:duration-300" />
+            {data.likes}
+          </button>
+          <span className="flex items-center gap-2">
+            <IoPeople className="w-5 h-5" />
+            {data.participants.length}
+          </span>
+        </div>
         {data.hashtag && (
           <span
             className={`${HASHTAG} flex items-center gap-2`}

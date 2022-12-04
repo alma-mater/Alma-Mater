@@ -111,6 +111,7 @@ model Room {
     hashtagId    String?
     pictures     Picture[]
     Message      Message[]
+    likes        Int                   @default(0)
 }
 
 // Necessary for Next auth
