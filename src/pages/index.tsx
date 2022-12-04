@@ -28,7 +28,7 @@ const Feed = () => {
   return (
     <Page className="m-2" title="Feed">
       <MobileHeader />
-      <div className="my-8 block md:grid md:grid-cols-3 w-full">
+      <div className="my-8 block md:flex md:justify-between gap-10 w-full">
         <div className="max-w-[32ch] mx-auto w-full">
           <Hashtags />
         </div>

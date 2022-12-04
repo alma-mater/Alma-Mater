@@ -9,6 +9,7 @@ type RoomItemProps = {
   data: Room & {
     participants: ParticipantsInRooms[];
     hashtag: Hashtag | null;
+    authorRole: string;
   };
 };
 
