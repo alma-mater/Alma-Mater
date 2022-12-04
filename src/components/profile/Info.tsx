@@ -4,7 +4,6 @@ import { Avatar } from "components/common/Avatar";
 import Link from "next/link";
 import { BsFillChatRightDotsFill } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
-import { TbBabyCarriage } from "react-icons/tb";
 import ReactMarkdown from "react-markdown";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { GiHospitalCross } from "react-icons/gi";
@@ -17,58 +16,46 @@ export const PROFILE =
 export const Info = ({ user, session }: InfoProps) => {
   return (
     <div className="my-4 bg-white rounded-[10px] p-4 h-max">
-      <div className="relative flex justify-around items-center">
+      <div>
         {/* Settings */}
-        {session?.user?.id === user?.id && (
-          <>
-            <Link
-              href="/settings"
-              className="absolute top-5 left-2 hover:text-blue-500 duration-500"
-            >
-              <AiOutlineEdit className="w-12 h-12" />
-            </Link>
-            {user?.role === "SPECIALIST" && user?.id !== session?.user?.id && (
-              <Link
-                href={`/chat/${user?.id}`}
-                className="absolute top-5 right-2 hover:text-blue-500 duration-500"
-              >
-                <BsFillChatRightDotsFill className="w-12 h-12" />
-              </Link>
-            )}
-          </>
-        )}
         <div className="flex flex-col items-center justify-center">
           <Avatar src={user?.image} size={100} />
-          <h1 className="text-3xl font-medium mt-4">{user?.name}</h1>
+          <h1 className="text-3xl font-semibold mt-3">{user?.name}</h1>
+          <p className="text-lg text-center lowercase text-gray-400">
+            {user?.role}
+          </p>
+          {user?.bio && (
+            <>
+              <p className="p-4 text-lg">
+                <ReactMarkdown>{user.bio}</ReactMarkdown>
+              </p>
+            </>
+          )}
+          {session?.user?.id === user?.id && (
+              <Link
+                href="/settings"
+                className="bg-pink-500 p-2 rounded-xl text-center w-full text-white hover:bg-pink-600 duration-500"
+              >
+                Редактировать
+              </Link>
+          )}
+          {user?.role === "SPECIALIST" &&
+                user?.id !== session?.user?.id && (
+                  <Link
+                    href={`/chat/${user?.id}`}
+                    className="bg-pink-500 p-2 rounded-xl text-center w-full text-white hover:bg-pink-600 duration-500"
+                  >
+                    Написать специалисту
+                  </Link>
+                )}
         </div>
         {/* Sign Out */}
       </div>
       {/* General Info */}
-      <div className="flex items-center justify-between my-4 gap-2">
-        {user?.polyclinic && (
-          <div className={`${PROFILE} text-center`}>
-            <GiHospitalCross className="w-7 h-7" />
-            {user.polyclinic.name}
-          </div>
-        )}
-        <div className={`${PROFILE} text-center lowercase`}>
-          <TbBabyCarriage className="w-7 h-7" />
-          {user?.role}
-        </div>
-        <div className={PROFILE}>
-          <AiOutlineQuestionCircle className="w-7 h-7" />
-          {user?.Room.length}
-        </div>
+      <div className="my-4 gap-2 text-lg">
+        {user?.polyclinic && <p>Поликлиника: {user.polyclinic.name}</p>}
+        <p>Постов: {user?.Room.length}</p>
       </div>
-
-      {user?.bio && (
-        <>
-          <p className="text-xl">О себе</p>
-          <p className="border-[1px] border-gray-700 p-4 rounded-[10px] text-lg">
-            <ReactMarkdown>{user.bio}</ReactMarkdown>
-          </p>
-        </>
-      )}
     </div>
   );
 };

@@ -15,7 +15,7 @@ export const Specialists = () => {
           className="flex items-center justify-between px-2 w-full rounded-md hover:bg-gray-100 hover:duration-300"
         >
           <div className="flex items-center gap-2 p-2 m-2">
-            {s.image && <img src={s.image} alt="Hashtag" className="w-6 h-6" />}
+            {s.image && <img src={s.image} alt="Hashtag" className="w-6 h-6 rounded-xl" />}
             {s.name}
           </div>
         </Link>
