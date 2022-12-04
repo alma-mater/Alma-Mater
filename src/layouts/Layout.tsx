@@ -6,6 +6,7 @@ type LayoutProps = { children: React.ReactNode };
 
 export const Layout = ({ children }: LayoutProps) => {
   const links = [
+    { label: "Поликлиники", href: "/polyclinics" },
     { label: "Магазин", href: "/shop" },
     { label: "Беременность", href: "/workspace" },
   ];
