@@ -45,9 +45,6 @@ export const RoomItem = ({ data }: RoomItemProps) => {
             className={`${HASHTAG} flex items-center gap-2`}
             key={data.hashtagId}
           >
-            {data.hashtag.image && (
-              <img src={data.hashtag.image} className="w-4 h-4" />
-            )}
             {data.hashtag.name}
           </span>
         )}

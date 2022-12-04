@@ -5,7 +5,6 @@ import { publicProcedure, router } from "../trpc";
 const defaultHashtagSelect = Prisma.validator<Prisma.HashtagSelect>()({
   id: true,
   name: true,
-  image: true,
   createdAt: true,
   rooms: true,
 });
