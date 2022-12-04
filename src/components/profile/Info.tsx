@@ -2,7 +2,8 @@ import type { Session } from "next-auth";
 import type { User } from "@prisma/client";
 import { Avatar } from "components/common/Avatar";
 import Link from "next/link";
-import { GoSettings, GoSignOut } from "react-icons/go";
+import { GoSettings } from "react-icons/go";
+import { BsFillChatRightDotsFill } from "react-icons/bs";
 import { FaHospital, FaQuestionCircle, FaSchool } from "react-icons/fa";
 import ReactMarkdown from "react-markdown";
 
@@ -24,12 +25,15 @@ export const Info = ({ user, session }: InfoProps) => {
             >
               <GoSettings className="w-12 h-12" />
             </Link>
-            <Link
-              href="/api/auth/signout"
-              className="absolute top-5 right-2 hover:text-blue-500 duration-500"
-            >
-              <GoSignOut className="w-12 h-12" />
-            </Link>
+            {user?.newRole === "SPECIALIST" &&
+              user?.id !== session?.user?.id && (
+                <Link
+                  href={`/chat/${user?.id}`}
+                  className="absolute top-5 right-2 hover:text-blue-500 duration-500"
+                >
+                  <BsFillChatRightDotsFill className="w-12 h-12" />
+                </Link>
+              )}
           </>
         )}
         <div className="flex flex-col items-center justify-center">
@@ -46,10 +50,10 @@ export const Info = ({ user, session }: InfoProps) => {
             {user.polyclinic.name}
           </div>
         )}
-        {user?.role && (
+        {user?.newRole && (
           <div className={`${PROFILE} text-center`}>
             <FaSchool className="w-7 h-7" />
-            {user.role.name}
+            {user.newRole}
           </div>
         )}
         <div className={PROFILE}>

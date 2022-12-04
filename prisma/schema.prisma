@@ -84,6 +84,7 @@ model Room {
     description  String
     authorName   String?
     authorImage  String?
+    authorRole   NewRole               @default(PREGNANT)
     createdAt    DateTime              @unique @default(now())
     updatedAt    DateTime              @unique @default(now()) @updatedAt
     participants ParticipantsInRooms[]
@@ -140,7 +141,13 @@ model User {
     pictures      Picture[]
     role          Role?                 @relation(fields: [roleId], references: [id])
     roleId        String?
-    Message       Message[]
+    messages      Message[]
+    newRole       NewRole               @default(PREGNANT)
+}
+
+enum NewRole {
+    PREGNANT
+    SPECIALIST
 }
 
 model VerificationToken {

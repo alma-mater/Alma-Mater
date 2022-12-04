@@ -82,7 +82,7 @@ const RoomsSection = ({ session }: RoomSectionProps) => {
               ))}
             </Fragment>
           ) : (
-            <p className={NOTIFICATION}>No rooms found for this.</p>
+            <p className={NOTIFICATION}>Не нашлось постов на такое.</p>
           )}
         </>
       ))}

@@ -30,13 +30,16 @@ const NewRoom = () => {
     },
   });
 
+  const { data: user } = trpc.user.info.useQuery({ id: session?.user?.id });
+
   const onSubmit = handleSubmit(async (data) => {
     try {
       await addRoom.mutateAsync({
         ...data,
-        authorName: session?.user?.name || "unknown",
-        authorImage: session?.user?.image || "/default-avatar.png",
-        authorId: session?.user?.id || "",
+        authorName: user?.name || "unknown",
+        authorImage: user?.image || "/default-avatar.png",
+        authorRole: user?.newRole || "PREGNANT",
+        authorId: user?.id || "",
         hashtagId,
         isQuestion,
       });

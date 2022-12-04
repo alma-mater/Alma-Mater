@@ -1,11 +1,11 @@
 import { Polyclinic, Role } from "@prisma/client";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { CARD, INPUT_SELECT, TEXTAREA } from "styles";
+import { CARD, DELETE_BUTTON, INPUT_SELECT, TEXTAREA } from "styles";
 import { trpc } from "utils/trpc";
 
 type FormData = {
@@ -141,13 +141,18 @@ const EditProfile = () => {
             />
           </div>
 
-          <button
-            className="py-2 px-4 rounded-md text-white bg-blue-500 hover:bg-blue-600 hover:duration-500"
-            type="submit"
-            disabled={editProfile.isLoading}
-          >
-            Сохранить
-          </button>
+          <div className="flex justify-between items-center">
+            <button
+              className="py-2 px-4 rounded-md text-white bg-blue-500 hover:bg-blue-600 hover:duration-500"
+              type="submit"
+              disabled={editProfile.isLoading}
+            >
+              Сохранить
+            </button>
+            <button className={DELETE_BUTTON} onClick={() => signOut()}>
+              Выйти
+            </button>
+          </div>
 
           {editProfile.error && (
             <p className="text-red-500">{editProfile.error.message}</p>

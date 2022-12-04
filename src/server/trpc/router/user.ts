@@ -16,9 +16,14 @@ const defaultUserSelect = Prisma.validator<Prisma.UserSelect>()({
   Room: true,
   role: true,
   roleId: true,
+  messages: true,
+  newRole: true,
 });
 
 export const userRouter = router({
+  specialists: publicProcedure.query(({ ctx }) =>
+    ctx.prisma.user.findMany({ where: { newRole: "SPECIALIST" } })
+  ),
   info: publicProcedure
     .input(
       z.object({
@@ -29,10 +34,11 @@ export const userRouter = router({
     .query(async ({ ctx, input }) => {
       const { id, username } = input;
       const where = username ? { username } : { id };
-      return await ctx.prisma.user.findUnique({
+      const user = await ctx.prisma.user.findUnique({
         where,
         select: defaultUserSelect,
       });
+      return user;
     }),
   edit: publicProcedure
     .input(

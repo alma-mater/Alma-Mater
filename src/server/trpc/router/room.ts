@@ -10,6 +10,7 @@ const defaultRoomSelect = Prisma.validator<Prisma.RoomSelect>()({
   description: true,
   authorName: true,
   authorImage: true,
+  authorRole: true,
   createdAt: true,
   updatedAt: true,
   participants: true,
@@ -101,6 +102,7 @@ export const roomRouter = router({
         description: z.string().min(1).max(128),
         authorName: z.string().optional(),
         authorImage: z.string().optional(),
+        authorRole: z.enum(["PREGNANT", "SPECIALIST"]),
         authorId: z.string().cuid().optional(),
         hashtagId: z.string().optional(),
       })

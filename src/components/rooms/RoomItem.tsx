@@ -1,6 +1,7 @@
 import type { ParticipantsInRooms, Room, Hashtag } from "@prisma/client";
 import Link from "next/link";
 import { IoPeople } from "react-icons/io5";
+import { MdPregnantWoman, MdWork } from "react-icons/md";
 import { HASHTAG } from "styles";
 import { Avatar } from "../common/Avatar";
 
@@ -24,7 +25,7 @@ export const RoomItem = ({ data }: RoomItemProps) => {
         >
           <Avatar src={data.authorImage} size={32} />
           <span>{data.authorName || "ghost"}</span>
-          {/* <span>{data.authorRole}</span> */}
+          {data.authorRole === "PREGNANT" ? <MdPregnantWoman /> : <MdWork />}
         </Link>
         <p className="text-gray-500">{`${data.updatedAt.toLocaleDateString()}, ${data.updatedAt.toLocaleTimeString()}`}</p>
       </div>
@@ -45,9 +46,6 @@ export const RoomItem = ({ data }: RoomItemProps) => {
             className={`${HASHTAG} flex items-center gap-2`}
             key={data.hashtagId}
           >
-            {data.hashtag.image && (
-              <img src={data.hashtag.image} className="w-4 h-4" />
-            )}
             {data.hashtag.name}
           </span>
         )}
