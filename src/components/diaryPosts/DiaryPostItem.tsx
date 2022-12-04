@@ -1,13 +1,8 @@
 import { type DiaryPost } from "@prisma/client";
 import Link from "next/link";
-import { useState } from "react";
 import { CARD } from "styles";
-import { trpc } from "utils/trpc";
 
 export const DiaryPostItem = ({ item }: { item: DiaryPost & any }) => {
-  const [isFinished, setIsFinished] = useState(item.finished);
-  const finishDiaryPost = trpc.diaryPost.finish.useQuery({ id: item.id });
-
   return (
     <div className={`${CARD} my-4`}>
       <div className="w-full">
@@ -18,7 +13,7 @@ export const DiaryPostItem = ({ item }: { item: DiaryPost & any }) => {
       </div>
       <div className="w-full flex items-center justify-between">
         <p className="font-semibold">{item.hashtag.name}</p>
-        <p>{item.due?.toLocaleDateString()}</p>
+        <p>{item.createdAt.toLocaleDateString()}</p>
       </div>
     </div>
   );

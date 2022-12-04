@@ -14,7 +14,7 @@ export const PROFILE =
 
 export const Info = ({ user, session }: InfoProps) => {
   return (
-    <div className="my-4 bg-white rounded-[10px]  p-4 h-max">
+    <div className="my-4 bg-white rounded-[10px] p-4 h-max">
       <div className="relative flex justify-around items-center">
         {/* Settings */}
         {session?.user?.id === user?.id && (
