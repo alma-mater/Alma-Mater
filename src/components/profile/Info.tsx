@@ -53,7 +53,7 @@ export const Info = ({ user, session }: InfoProps) => {
         {user?.newRole && (
           <div className={`${PROFILE} text-center`}>
             <FaSchool className="w-7 h-7" />
-            {user.newRole}
+            {user.newRole.toLowerCase()}
           </div>
         )}
         <div className={PROFILE}>
