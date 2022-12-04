@@ -6,6 +6,8 @@ import { BsFillChatRightDotsFill } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
 import { TbBabyCarriage } from "react-icons/tb";
 import ReactMarkdown from "react-markdown";
+import { trpc } from "utils/trpc";
+import { useRouter } from "next/router";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { GiHospitalCross } from "react-icons/gi";
 
@@ -15,6 +17,15 @@ export const PROFILE =
   "border-[1px] border-gray-700 gap-2 w-[100px] h-[100px] flex flex-col items-center justify-center rounded-[10px] text-xl";
 
 export const Info = ({ user, session }: InfoProps) => {
+  const router = useRouter();
+  const addChat = trpc.chat.add.useMutation();
+  const handleClick = async () => {
+    const chat = await addChat.mutateAsync({
+      specialistId: user?.id,
+    });
+    router.push(`/chats/${chat.id}`);
+  };
+
   return (
     <div className="my-4 bg-white rounded-[10px] p-4 h-max">
       <div className="relative flex justify-around items-center">
@@ -27,13 +38,13 @@ export const Info = ({ user, session }: InfoProps) => {
             >
               <AiOutlineEdit className="w-12 h-12" />
             </Link>
-            {user?.role === "SPECIALIST" && user?.id !== session?.user?.id && (
-              <Link
-                href={`/chat/${user?.id}`}
+            {true && (
+              <button
+                onClick={handleClick}
                 className="absolute top-5 right-2 hover:text-blue-500 duration-500"
               >
                 <BsFillChatRightDotsFill className="w-12 h-12" />
-              </Link>
+              </button>
             )}
           </>
         )}
