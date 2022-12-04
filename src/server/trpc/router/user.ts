@@ -14,15 +14,13 @@ const defaultUserSelect = Prisma.validator<Prisma.UserSelect>()({
   polyclinicId: true,
   rooms: true,
   Room: true,
-  role: true,
-  roleId: true,
   messages: true,
-  newRole: true,
+  role: true,
 });
 
 export const userRouter = router({
   specialists: publicProcedure.query(({ ctx }) =>
-    ctx.prisma.user.findMany({ where: { newRole: "SPECIALIST" } })
+    ctx.prisma.user.findMany({ where: { role: "SPECIALIST" } })
   ),
   info: publicProcedure
     .input(
@@ -48,7 +46,7 @@ export const userRouter = router({
           username: z.string().nullish(),
           polyclinicId: z.string().uuid().nullish(),
           bio: z.string().max(128).nullish(),
-          roleId: z.string().uuid().nullish(),
+          role: z.enum(["PREGNANT", "SPECIALIST"]),
         }),
       })
     )

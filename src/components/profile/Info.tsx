@@ -25,15 +25,14 @@ export const Info = ({ user, session }: InfoProps) => {
             >
               <BiEdit className="w-12 h-12" />
             </Link>
-            {user?.newRole === "SPECIALIST" &&
-              user?.id !== session?.user?.id && (
-                <Link
-                  href={`/chat/${user?.id}`}
-                  className="absolute top-5 right-2 hover:text-blue-500 duration-500"
-                >
-                  <BsFillChatRightDotsFill className="w-12 h-12" />
-                </Link>
-              )}
+            {user?.role === "SPECIALIST" && user?.id !== session?.user?.id && (
+              <Link
+                href={`/chat/${user?.id}`}
+                className="absolute top-5 right-2 hover:text-blue-500 duration-500"
+              >
+                <BsFillChatRightDotsFill className="w-12 h-12" />
+              </Link>
+            )}
           </>
         )}
         <div className="flex flex-col items-center justify-center">
@@ -50,12 +49,10 @@ export const Info = ({ user, session }: InfoProps) => {
             {user.polyclinic.name}
           </div>
         )}
-        {user?.newRole && (
-          <div className={`${PROFILE} text-center`}>
-            <FaSchool className="w-7 h-7" />
-            {user.newRole}
-          </div>
-        )}
+        <div className={`${PROFILE} text-center`}>
+          <FaSchool className="w-7 h-7" />
+          {user?.role}
+        </div>
         <div className={PROFILE}>
           <FaQuestionCircle className="w-7 h-7" />
           {user?.Room.length}
