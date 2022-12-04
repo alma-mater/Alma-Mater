@@ -32,7 +32,7 @@ export async function getStaticProps() {
 const Shop = ({ shop }: any) => {
   return (
     <>
-      <h1 className={`${NOTIFICATION} mt-0 text-center`}>
+      <h1 className={`${NOTIFICATION} mt-0 text-center max-w-[720px] mx-auto`}>
         Магазин, в котором доступны товары по доступным ценам!
       </h1>
       <div className="grid md:grid-cols-3 grid-cols-1">
