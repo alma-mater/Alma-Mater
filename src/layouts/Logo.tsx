@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import {MdOutlinePregnantWoman} from 'react-icons/md'
 
 export const Logo = () => {
   return (
@@ -8,8 +7,7 @@ export const Logo = () => {
       href="/"
       className="flex items-center px-2 rounded-xl"
     >
-      <MdOutlinePregnantWoman className="w-7 h-7"/>
-      <span className="text-xl font-medium">Alma-Mater</span>
+      <span className="text-xl font-bold">ALMAMATER</span>
     </Link>
   );
 };
