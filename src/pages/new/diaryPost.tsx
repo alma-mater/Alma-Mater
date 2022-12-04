@@ -12,7 +12,6 @@ type FormData = {
   title: string;
   content: string;
   hashtagId: string;
-  due: Date;
 };
 
 const NewDiaryPost = () => {
@@ -35,7 +34,6 @@ const NewDiaryPost = () => {
         ...data,
         userId: session?.user?.id || "",
         hashtagId,
-        due: new Date(data.due),
       });
     } catch {}
   });
@@ -96,18 +94,6 @@ const NewDiaryPost = () => {
                 </option>
               ))}
           </select>
-        </div>
-        {/* Due Date */}
-        <div className="my-2">
-          <label className="text-xl block" htmlFor="hashtag">
-            Дата:
-          </label>
-          <input
-            {...register("due")}
-            id="dueDate"
-            type="date"
-            className={INPUT_TEXT}
-          />
         </div>
         {/* Submit Form */}
         <button
